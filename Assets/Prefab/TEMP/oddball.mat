@@ -94,7 +94,7 @@ Material:
     - _DitherMode: 0
     - _FilterMode: 1
     - _LightMode: 1
-    - _ResolutionLimit: 64
+    - _ResolutionLimit: 256
     - _SnapMode: 2
     - _SnapsPerUnit: 64
     m_Floats:

@@ -1130,8 +1130,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.0454712, y: -79.25983}
-  m_SizeDelta: {x: -40.291, y: -179.6065}
+  m_AnchoredPosition: {x: -3.7717285, y: -71.74576}
+  m_SizeDelta: {x: -117.4933, y: -194.6346}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1076519661
 MonoBehaviour:
@@ -1546,7 +1546,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1245039388}
   - component: {fileID: 1245039390}
-  - component: {fileID: 1245039389}
+  - component: {fileID: 1245039391}
   m_Layer: 0
   m_Name: Dialogue_Parent
   m_TagString: Untagged
@@ -1573,39 +1573,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -371.6466}
-  m_SizeDelta: {x: -100, y: -843.2932}
+  m_AnchoredPosition: {x: -0.00012207031, y: -380.0999}
+  m_SizeDelta: {x: 0.0001, y: -800.0873}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1245039389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245039387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1245039390
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1614,6 +1584,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1245039387}
   m_CullTransparentMesh: 1
+--- !u!114 &1245039391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245039387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 2800000, guid: ff78f7447a7a63a4285efc878472e0dd, type: 3}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &1435363207
 GameObject:
   m_ObjectHideFlags: 0
@@ -1766,8 +1763,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.9689331, y: 0}
-  m_SizeDelta: {x: -40.444, y: -146.5853}
+  m_AnchoredPosition: {x: 0.0004272461, y: -3.8070068}
+  m_SizeDelta: {x: -109.9491, y: -146.5853}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1468375919
 CanvasRenderer:
@@ -1806,8 +1803,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4286176255
+  m_fontColor: {r: 1, g: 0.86033297, b: 0.4764151, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2015,8 +2012,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.0454712, y: 82.899994}
-  m_SizeDelta: {x: -40.2909, y: -186}
+  m_AnchoredPosition: {x: -0, y: 86}
+  m_SizeDelta: {x: -109.95, y: -233.63}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1783302879
 CanvasRenderer:
@@ -2080,7 +2077,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0

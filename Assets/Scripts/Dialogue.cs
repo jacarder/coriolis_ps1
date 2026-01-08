@@ -7,6 +7,7 @@ public class Dialogue : ScriptableObject
 	public DialogueNode RootNode;
 	public void StartDialogue()
 	{
-		DialogueManager.Instance.StartDialogue("test", RootNode);
+		//	TODO how do we get the npc name. Cant do it here because this is a scriptable object
+		DialogueManager.Instance.StartDialogue("", RootNode);
 	}
 }
