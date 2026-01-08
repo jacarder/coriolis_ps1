@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public static CameraController instance;
     [Header("Camera References")]
     public Camera mainCamera; // The orbiting third-person camera
     public Camera firstPersonCamera; // The player's FPV camera
@@ -18,7 +19,12 @@ public class CameraController : MonoBehaviour
     public float inactivityTime = 3f;
     public float transitionDuration = 1f;
 
+    [Header("NPC Interaction Settings")]
+    public float npcZoomFOV = 40f; // Zoomed in FOV (default is usually 60)
+    public float npcTrackingSpeed = 5f; // How fast camera tracks NPC
+
     private bool isOrbiting = true;
+    private bool isNPCInteraction = false;
     private float inactivityTimer = 0f;
     private float orbitAngle = 0f;
     private float transitionTimer = 0f;
@@ -26,6 +32,8 @@ public class CameraController : MonoBehaviour
 
     private Vector3 transitionStartPos;
     private Quaternion transitionStartRot;
+    private Transform currentNPC;
+    private float defaultFOV;
 
     void Start()
     {
@@ -45,6 +53,14 @@ public class CameraController : MonoBehaviour
         mainCamera.enabled = true;
         firstPersonCamera.enabled = false;
         orbitAngle = 0f;
+
+        // Store default FOV
+        defaultFOV = firstPersonCamera.fieldOfView;
+    }
+
+    void Awake()
+    {
+        instance = this;
     }
 
     void Update()
@@ -61,6 +77,11 @@ public class CameraController : MonoBehaviour
         {
             UpdateCameraTransition();
         }
+        else if (isNPCInteraction && currentNPC != null)
+        {
+            // Track NPC with first-person camera
+            UpdateNPCTracking();
+        }
         else if (isOrbiting)
         {
             UpdateOrbitCamera();
@@ -69,8 +90,16 @@ public class CameraController : MonoBehaviour
 
     void CheckForInput()
     {
-        // Check for any mouse or keyboard input
-        if (Input.anyKey || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+        // Don't switch cameras during NPC interaction
+        if (isNPCInteraction) return;
+
+        // Check for keyboard input only (ignore mouse movement during potential NPC setup)
+        bool hasKeyboardInput = Input.anyKeyDown;
+
+        // Only check mouse if not transitioning
+        bool hasMouseInput = !isTransitioning && (Mathf.Abs(Input.GetAxis("Mouse X")) > 0.1f || Mathf.Abs(Input.GetAxis("Mouse Y")) > 0.1f);
+
+        if (hasKeyboardInput || hasMouseInput)
         {
             if (isOrbiting && !isTransitioning)
             {
@@ -82,7 +111,8 @@ public class CameraController : MonoBehaviour
 
     void UpdateInactivityTimer()
     {
-        if (!isOrbiting && !isTransitioning)
+        // Don't return to orbit during NPC interaction
+        if (!isOrbiting && !isTransitioning && !isNPCInteraction)
         {
             inactivityTimer += Time.deltaTime;
 
@@ -90,6 +120,11 @@ public class CameraController : MonoBehaviour
             {
                 StartTransitionToOrbit();
             }
+        }
+        else if (isNPCInteraction)
+        {
+            // Reset timer during NPC interaction so it doesn't trigger immediately after
+            inactivityTimer = 0f;
         }
     }
 
@@ -130,6 +165,29 @@ public class CameraController : MonoBehaviour
                 firstPersonCamera.enabled = true;
             }
         }
+    }
+
+    void UpdateNPCTracking()
+    {
+        if (currentNPC == null || !firstPersonCamera.enabled) return;
+
+        // Calculate direction to NPC
+        Vector3 directionToNPC = currentNPC.position - firstPersonCamera.transform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(directionToNPC);
+
+        // Smoothly rotate camera to look at NPC (X and Y axis)
+        firstPersonCamera.transform.rotation = Quaternion.Slerp(
+            firstPersonCamera.transform.rotation,
+            targetRotation,
+            Time.deltaTime * npcTrackingSpeed
+        );
+
+        // Smoothly zoom FOV
+        // firstPersonCamera.fieldOfView = Mathf.Lerp(
+        //     firstPersonCamera.fieldOfView,
+        //     npcZoomFOV,
+        //     Time.deltaTime * npcTrackingSpeed
+        // );
     }
 
     void StartTransitionToFPV()
@@ -187,5 +245,49 @@ public class CameraController : MonoBehaviour
         float y = player.position.y + orbitHeight;
 
         return new Vector3(x, y, z);
+    }
+
+    // Public method for HUD Controller to call
+    public void StartNPCInteraction(Transform npc)
+    {
+        if (npc == null) return;
+
+        currentNPC = npc;
+        isNPCInteraction = true;
+        inactivityTimer = 0f;
+
+        // Force complete any ongoing transition
+        if (isTransitioning)
+        {
+            isTransitioning = false;
+        }
+
+        // Make sure we're in first-person mode immediately
+        if (!firstPersonCamera.enabled)
+        {
+            // Switch directly to first-person without transition
+            mainCamera.enabled = false;
+            firstPersonCamera.enabled = true;
+            isOrbiting = false;
+        }
+    }
+
+    // Public method to end NPC interaction
+    public void EndNPCInteraction(bool returnToOrbit = true)
+    {
+        currentNPC = null;
+        isNPCInteraction = false;
+
+        // Reset FOV to default
+        if (firstPersonCamera != null)
+        {
+            firstPersonCamera.fieldOfView = defaultFOV;
+        }
+
+        // if (returnToOrbit)
+        // {
+        //     StartTransitionToOrbit();
+        // }
+        // Otherwise stay in first-person with normal FOV
     }
 }
