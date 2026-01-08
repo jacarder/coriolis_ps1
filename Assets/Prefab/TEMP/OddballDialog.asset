@@ -10,29 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66ff36dfd6eab984b9200a52694bd399, type: 3}
-  m_Name: ConsortiumRep
+  m_Name: OddballDialog
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue
   RootNode:
-    dialogueText: Well... hello there. I'm representing the Consortium. Are you here
-      on your own?
+    dialogueText: HEEEEEEELP... HELP ME!
+    clip: {fileID: 8300000, guid: f8375edcc5259bf4db1456367489fcf6, type: 3}
     responses:
-    - responseText: Yes
+    - responseText: Are you ok?!
       nextNode:
-        dialogueText: Well then. This is very good news.
+        dialogueText: OH GOD HELP ME!
+        clip: {fileID: 8300000, guid: 35c0a9869e485eb49995cf8b57ed0c12, type: 3}
         responses:
-        - responseText: Oh yeah?
+        - responseText: Leave
           nextNode:
             dialogueText: 
+            clip: {fileID: 0}
             responses: []
-        - responseText: Hmm
-          nextNode:
-            dialogueText: 
-            responses: []
-        - responseText: ok
-          nextNode:
-            dialogueText: 
-            responses: []
-    - responseText: No
+    - responseText: Leave
       nextNode:
-        dialogueText: I regret to inform you that you cannot pass.
+        dialogueText: 
+        clip: {fileID: 0}
         responses: []

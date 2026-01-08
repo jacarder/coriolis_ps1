@@ -7,6 +7,6 @@ public class Dialogue : ScriptableObject
 	public DialogueNode RootNode;
 	public void StartDialogue()
 	{
-		Debug.Log("made it");
+		DialogueManager.Instance.StartDialogue("test", RootNode);
 	}
 }

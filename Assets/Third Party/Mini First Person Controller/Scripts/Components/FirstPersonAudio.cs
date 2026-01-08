@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class FirstPersonAudio : MonoBehaviour
 {
+    public static FirstPersonAudio instance;
     public FirstPersonMovement character;
     public GroundCheck groundCheck;
 
@@ -10,6 +11,7 @@ public class FirstPersonAudio : MonoBehaviour
     public AudioSource stepAudio;
     public AudioSource runningAudio;
     [Tooltip("Minimum velocity for moving audio to play")]
+    public AudioSource dialogueAudio;
     /// <summary> "Minimum velocity for moving audio to play" </summary>
     public float velocityThreshold = .01f;
     Vector2 lastCharacterPosition;
@@ -31,6 +33,10 @@ public class FirstPersonAudio : MonoBehaviour
 
     AudioSource[] MovingAudios => new AudioSource[] { stepAudio, runningAudio, crouchedAudio };
 
+    void Awake()
+    {
+        instance = this;
+    }
 
     void Reset()
     {
@@ -115,6 +121,7 @@ public class FirstPersonAudio : MonoBehaviour
     void PlayJumpAudio() => PlayRandomClip(jumpAudio, jumpSFX);
     void PlayCrouchStartAudio() => PlayRandomClip(crouchStartAudio, crouchStartSFX);
     void PlayCrouchEndAudio() => PlayRandomClip(crouchEndAudio, crouchEndSFX);
+    public void PlayDialogueAudio(AudioClip clip) => PlayDialogClip(dialogueAudio, clip);
     #endregion
 
     #region Subscribe/unsubscribe to events.
@@ -189,6 +196,13 @@ public class FirstPersonAudio : MonoBehaviour
             while (clip == audio.clip)
                 clip = clips[Random.Range(0, clips.Length)];
 
+        // Play the clip.
+        audio.clip = clip;
+        audio.Play();
+    }
+
+    public static void PlayDialogClip(AudioSource audio, AudioClip clip)
+    {
         // Play the clip.
         audio.clip = clip;
         audio.Play();

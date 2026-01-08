@@ -32,12 +32,25 @@ public class DialogueManager : MonoBehaviour
     // Starts the dialogue with given title and dialogue node
     public void StartDialogue(string title, DialogueNode node)
     {
+        //  Stop all audio
+        //  TODO add tags for npcs to audio source to find
+        foreach (AudioSource audio in FindObjectsByType<AudioSource>(FindObjectsSortMode.None))
+            audio.Pause();
+        //  Turn on dialog in hud
+        HUDController.instance.EnableDialog();
+
         // Display the dialogue UI
         ShowDialogue();
 
         // Set dialogue title and body text
         DialogTitleText.text = title;
         DialogBodyText.text = node.dialogueText;
+
+        //  Play dialogue audio clip
+        if (node.clip)
+        {
+            FirstPersonAudio.instance.PlayDialogueAudio(node.clip);
+        }
 
         // Remove any existing response buttons
         foreach (Transform child in responseButtonContainer)
@@ -68,18 +81,26 @@ public class DialogueManager : MonoBehaviour
         {
             // If no follow-up node, end the dialogue
             HideDialogue();
+            foreach (AudioSource audio in FindObjectsByType<AudioSource>(FindObjectsSortMode.None))
+                audio.UnPause();
         }
     }
 
     // Hide the dialogue UI
     public void HideDialogue()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        FirstPersonLook.instance.StartMovement();
+        FirstPersonMovement.instance.StartMovement();
         DialogueParent.SetActive(false);
     }
 
     // Show the dialogue UI
     private void ShowDialogue()
     {
+        Cursor.lockState = CursorLockMode.None;
+        FirstPersonLook.instance.StopMovement();
+        FirstPersonMovement.instance.StopMovement();
         DialogueParent.SetActive(true);
     }
 

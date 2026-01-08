@@ -14,19 +14,8 @@ public class Interactable : MonoBehaviour
         // DisableOutline();
     }
 
-    public void EnableFloatInteractionText(string text)
-    {
-        interactionText.EnableInteractionText(text);
-    }
-
-    public void DisableFloatInteractionText()
-    {
-        interactionText.DisableInteractionText();
-    }
-
     public void Interact()
     {
-        //  TODO bring up
         onInteraction.Invoke();
     }
 }

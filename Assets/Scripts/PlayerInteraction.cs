@@ -10,6 +10,7 @@ public class PlayerInteraction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && currentInteractable != null)
         {
             currentInteractable.Interact();
+            DisableCurrentInteractable();
         }
     }
 
@@ -19,13 +20,13 @@ public class PlayerInteraction : MonoBehaviour
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         if (Physics.Raycast(ray, out hit, playerReach))
         {
-            if (hit.collider.tag == "Interactable")
+            if (hit.collider.tag == "Interactable" && !DialogueManager.Instance.IsDialogueActive())
             {
                 Interactable newInteractable = hit.collider.GetComponent<Interactable>();
                 if (newInteractable.enabled)
                 {
                     currentInteractable = newInteractable;
-                    FloatInteractionText.instance.EnableInteractionText(currentInteractable.message);
+                    HUDController.instance.EnableInteractionText(currentInteractable.message);
                 }
                 else
                 {
@@ -45,7 +46,7 @@ public class PlayerInteraction : MonoBehaviour
 
     void DisableCurrentInteractable()
     {
-        FloatInteractionText.instance.DisableInteractionText();
+        HUDController.instance.DisableInteractionText();
         if (currentInteractable)
         {
             currentInteractable = null;
