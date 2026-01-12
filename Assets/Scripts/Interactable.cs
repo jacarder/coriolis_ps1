@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class Interactable : MonoBehaviour
 {
-    FloatInteractionText interactionText;
     public string message;
     public UnityEvent onInteraction;
 

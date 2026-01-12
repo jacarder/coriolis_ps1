@@ -3,8 +3,12 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
+    public string characterName;
+    public AnimationClip idleAnimation;
     public AudioSource audioSource;
     public AudioClip main;
+    public Dialogue dialogue;
+    public GameObject npcFocusPoint;
     void Start()
     {
         PlayMainAudio();
@@ -21,5 +25,10 @@ public class NPC : MonoBehaviour
         audioSource.loop = true;
         audioSource.spatialBlend = 1f;
         audioSource.Play();
+    }
+
+    public void StartDialogue()
+    {
+        dialogue.StartDialogue(this.gameObject);
     }
 }

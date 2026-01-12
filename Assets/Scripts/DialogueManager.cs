@@ -30,17 +30,16 @@ public class DialogueManager : MonoBehaviour
     }
 
     // Starts the dialogue with given title and dialogue node
-    public void StartDialogue(string title, DialogueNode node)
+    public void StartDialogue(string title, DialogueNode node, GameObject npc)
     {
         //  Stop all audio
         //  TODO add tags for npcs to audio source to find
-        foreach (AudioSource audio in FindObjectsByType<AudioSource>(FindObjectsSortMode.None))
-            audio.Pause();
+        npc.GetComponent<NPC>().audioSource.Pause();
         //  Turn on dialog in hud
         HUDController.instance.EnableDialog();
 
         // Display the dialogue UI
-        ShowDialogue();
+        ShowDialogue(npc);
 
         // Set dialogue title and body text
         DialogTitleText.text = title;
@@ -65,24 +64,23 @@ public class DialogueManager : MonoBehaviour
             buttonObj.GetComponentInChildren<TextMeshProUGUI>().text = response.responseText;
 
             // Setup button to trigger SelectResponse when clicked
-            buttonObj.GetComponent<Button>().onClick.AddListener(() => SelectResponse(response, title));
+            buttonObj.GetComponent<Button>().onClick.AddListener(() => SelectResponse(response, title, npc));
         }
     }
 
     // Handles response selection and triggers next dialogue node
-    public void SelectResponse(DialogueResponse response, string title)
+    public void SelectResponse(DialogueResponse response, string title, GameObject npc)
     {
         // Check if there's a follow-up node
         if (!response.nextNode.IsLastNode())
         {
-            StartDialogue(title, response.nextNode); // Start next dialogue
+            StartDialogue(title, response.nextNode, npc); // Start next dialogue
         }
         else
         {
             // If no follow-up node, end the dialogue
             HideDialogue();
-            foreach (AudioSource audio in FindObjectsByType<AudioSource>(FindObjectsSortMode.None))
-                audio.UnPause();
+            npc.GetComponent<NPC>().audioSource.UnPause();
         }
     }
 
@@ -97,9 +95,11 @@ public class DialogueManager : MonoBehaviour
     }
 
     // Show the dialogue UI
-    private void ShowDialogue()
+    private void ShowDialogue(GameObject npc)
     {
-        CameraController.instance.StartNPCInteraction(GameObject.FindGameObjectWithTag("Interactable").transform);
+        //  TODO get closest gameobject interactable
+        //  Probably not good, but this works for now.
+        CameraController.instance.StartNPCInteraction(npc.GetComponent<NPC>().npcFocusPoint.transform);
         Cursor.lockState = CursorLockMode.None;
         FirstPersonLook.instance.StopMovement();
         FirstPersonMovement.instance.StopMovement();
