@@ -12,6 +12,7 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI DialogTitleText, DialogBodyText; // Text components for title and body
     public GameObject responseButtonPrefab; // Prefab for generating response buttons
     public Transform responseButtonContainer; // Container to hold response buttons
+    private DialogueNode parentNode;
 
     private void Awake()
     {
@@ -32,15 +33,42 @@ public class DialogueManager : MonoBehaviour
     // Starts the dialogue with given title and dialogue node
     public void StartDialogue(string title, DialogueNode node, GameObject npc)
     {
+        parentNode = node;
         //  Stop all audio
         //  TODO add tags for npcs to audio source to find
         npc.GetComponent<NPC>().audioSource.Pause();
         //  Turn on dialog in hud
         HUDController.instance.EnableDialog();
-
-        // Display the dialogue UI
         ShowDialogue(npc);
+        // Display the dialogue UI
+        GetDialogue(title, node, npc);
+    }
 
+    // Handles response selection and triggers next dialogue node
+    public void SelectResponse(DialogueResponse response, string title, GameObject npc)
+    {
+        // Check if there's a follow-up node
+        if (!response.nextNode.IsLastNode())
+        {
+            GetDialogue(title, response.nextNode, npc); // Start next dialogue
+        }
+        else
+        {
+            if (response.returnToParent)
+            {
+                GetDialogue(title, parentNode, npc); // Start next dialogue
+            }
+            else
+            {
+                // If no follow-up node, end the dialogue
+                HideDialogue();
+                npc.GetComponent<NPC>().audioSource.UnPause();
+            }
+        }
+    }
+
+    private void GetDialogue(string title, DialogueNode node, GameObject npc)
+    {
         // Set dialogue title and body text
         DialogTitleText.text = title;
         DialogBodyText.text = node.dialogueText;
@@ -65,22 +93,6 @@ public class DialogueManager : MonoBehaviour
 
             // Setup button to trigger SelectResponse when clicked
             buttonObj.GetComponent<Button>().onClick.AddListener(() => SelectResponse(response, title, npc));
-        }
-    }
-
-    // Handles response selection and triggers next dialogue node
-    public void SelectResponse(DialogueResponse response, string title, GameObject npc)
-    {
-        // Check if there's a follow-up node
-        if (!response.nextNode.IsLastNode())
-        {
-            StartDialogue(title, response.nextNode, npc); // Start next dialogue
-        }
-        else
-        {
-            // If no follow-up node, end the dialogue
-            HideDialogue();
-            npc.GetComponent<NPC>().audioSource.UnPause();
         }
     }
 

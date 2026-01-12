@@ -15,24 +15,35 @@ MonoBehaviour:
   RootNode:
     dialogueText: Well... hello there. I'm representing the Consortium. Are you here
       on your own?
+    clip: {fileID: 0}
     responses:
     - responseText: Yes
       nextNode:
         dialogueText: Well then. This is very good news.
+        clip: {fileID: 0}
         responses:
-        - responseText: Oh yeah?
-          nextNode:
-            dialogueText: 
-            responses: []
         - responseText: Hmm
           nextNode:
             dialogueText: 
+            clip: {fileID: 0}
             responses: []
-        - responseText: ok
+          returnToParent: 0
+        - responseText: Come again?
           nextNode:
             dialogueText: 
+            clip: {fileID: 0}
             responses: []
+          returnToParent: 1
+        - responseText: Oh yeah?
+          nextNode:
+            dialogueText: 
+            clip: {fileID: 0}
+            responses: []
+          returnToParent: 0
+      returnToParent: 0
     - responseText: No
       nextNode:
         dialogueText: I regret to inform you that you cannot pass.
+        clip: {fileID: 0}
         responses: []
+      returnToParent: 0
