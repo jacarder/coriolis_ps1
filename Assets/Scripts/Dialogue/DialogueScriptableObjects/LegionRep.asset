@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66ff36dfd6eab984b9200a52694bd399, type: 3}
+  m_Name: LegionRep
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue
+  RootNode:
+    dialogueText: "\"Civilian. You\u2019re in Legion space. State your business.\""
+    clip: {fileID: 8300000, guid: 583afb22e08ebd946bb835af3cda5949, type: 3}
+    responses:
+    - responseText: Looking for work.
+      nextNode:
+        dialogueText: "\"Everyone is. Most can\u2019t stomach it. What makes you
+          different?\""
+        clip: {fileID: 8300000, guid: 2e0da7486bbe61d488e83b89689b2d9a, type: 3}
+        responses:
+        - responseText: I follow orders.
+          nextNode:
+            dialogueText: "\u201CResults matter. Orders matter more. Survival is
+              optional.\u201D  He studies you, then lowers his voice. \u201CPatrol
+              went silent near the Kua Belt. No beacon. No bodies. Legion doesn\u2019t
+              like mysteries.\u201D"
+            clip: {fileID: 8300000, guid: 0f5ba1494baf5d342b94b5f85da854b1, type: 3}
+            responses:
+            - responseText: What's the pay?
+              nextNode:
+                dialogueText: 
+                clip: {fileID: 0}
+                responses: []
+              returnToParent: 0
+            - responseText: Who were they?
+              nextNode:
+                dialogueText: 
+                clip: {fileID: 0}
+                responses: []
+              returnToParent: 0
+          returnToParent: 0
+        - responseText: I get results
+          nextNode:
+            dialogueText: "\u201CResults matter. Orders matter more. Survival is
+              optional.\u201D  He studies you, then lowers his voice. \u201CPatrol
+              went silent near the Kua Belt. No beacon. No bodies. Legion doesn\u2019t
+              like mysteries.\u201D"
+            clip: {fileID: 8300000, guid: 0f5ba1494baf5d342b94b5f85da854b1, type: 3}
+            responses: []
+          returnToParent: 0
+      returnToParent: 0
