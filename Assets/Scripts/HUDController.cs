@@ -7,10 +7,15 @@ public class HUDController : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        DisableDice();
         DisableDialog();
     }
     [SerializeField] TMP_Text interactionText;
     [SerializeField] GameObject dialoguePanel;
+    [SerializeField] GameObject dice;
+    [SerializeField] GameObject diceResultsContainer;
+    [SerializeField] Camera dicCamera;
+
     public void EnableInteractionText(string text)
     {
         interactionText.text = text + " (F)";
@@ -28,5 +33,17 @@ public class HUDController : MonoBehaviour
     public void DisableDialog()
     {
         dialoguePanel.SetActive(false);
+    }
+
+    public void EnableDice()
+    {
+        dice.SetActive(true);
+        diceResultsContainer.SetActive(true);
+    }
+
+    public void DisableDice()
+    {
+        dice.SetActive(false);
+        diceResultsContainer.SetActive(false);
     }
 }
