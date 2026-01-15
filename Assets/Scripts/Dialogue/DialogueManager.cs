@@ -13,7 +13,6 @@ public class DialogueManager : MonoBehaviour
     public GameObject responseButtonPrefab; // Prefab for generating response buttons
     public Transform responseButtonContainer; // Container to hold response buttons
     private DialogueNode parentNode;
-    private Vector3 originalPosition;
 
     private void Awake()
     {
@@ -34,8 +33,11 @@ public class DialogueManager : MonoBehaviour
     // Starts the dialogue with given title and dialogue node
     public void StartDialogue(string title, DialogueNode node, GameObject npc)
     {
+        //  TEMP TODO
+        PlayerCharacter player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>();
+        int dice = player.characterStats.GetTotalDiceBySkill(SkillType.Culture);
+        DiceManager.instance.Roll(dice);
         // Turn to player
-        originalPosition = npc.transform.position;
         npc.GetComponent<NPC>().RotateTowards(GameObject.FindGameObjectWithTag("Player").transform.position);
         //  Set parent dialog node
         parentNode = node;
@@ -115,8 +117,6 @@ public class DialogueManager : MonoBehaviour
     // Show the dialogue UI
     private void ShowDialogue(GameObject npc)
     {
-        //  TODO get closest gameobject interactable
-        //  Probably not good, but this works for now.
         CameraController.instance.StartNPCInteraction(npc.GetComponent<NPC>().npcFocusPoint.transform);
         Cursor.lockState = CursorLockMode.None;
         FirstPersonLook.instance.StopMovement();

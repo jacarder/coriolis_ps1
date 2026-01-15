@@ -5,6 +5,7 @@ using UnityEngine;
 public class NPC : MonoBehaviour
 {
     public string characterName;
+    public CharacterStats characterStats;
     public AnimationClip idleAnimation;
     public AudioSource audioSource;
     public AudioClip main;

@@ -29,7 +29,6 @@ public class DiceManager : MonoBehaviour
         HUDController.instance.EnableDice();
         dice = CreateDice(numberOfDie);
         ShowDieResult();
-        Debug.Log("ready to start");
         StartCoroutine(DelayRoll(dice));
     }
     private IEnumerator DelayRoll(List<GameObject> dice)
