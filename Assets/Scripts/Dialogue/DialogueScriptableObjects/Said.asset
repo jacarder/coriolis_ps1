@@ -13,6 +13,18 @@ MonoBehaviour:
   m_Name: Said
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue
   RootNode:
-    dialogueText: 
+    dialogueText: Why, hello there friend. May the Martyr bless you.
     clip: {fileID: 0}
-    responses: []
+    responses:
+    - responseText: Are you a Samaritan?
+      nextNode:
+        dialogueText: Yes child I am. We are all the Martyrs children.
+        clip: {fileID: 0}
+        responses:
+        - responseText: Tell me more
+          nextNode:
+            dialogueText: 
+            clip: {fileID: 0}
+            responses: []
+          returnToParent: 0
+      returnToParent: 0
