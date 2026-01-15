@@ -33,10 +33,6 @@ public class DialogueManager : MonoBehaviour
     // Starts the dialogue with given title and dialogue node
     public void StartDialogue(string title, DialogueNode node, GameObject npc)
     {
-        //  TEMP TODO
-        PlayerCharacter player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>();
-        int dice = player.characterStats.GetTotalDiceBySkill(SkillType.Culture);
-        DiceManager.instance.Roll(dice);
         // Turn to player
         npc.GetComponent<NPC>().RotateTowards(GameObject.FindGameObjectWithTag("Player").transform.position);
         //  Set parent dialog node
@@ -54,6 +50,13 @@ public class DialogueManager : MonoBehaviour
     // Handles response selection and triggers next dialogue node
     public void SelectResponse(DialogueResponse response, string title, GameObject npc)
     {
+        if (response.isSkillCheck)
+        {
+            PlayerCharacter player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>();
+            int dice = player.characterStats.GetTotalDiceBySkill(response.skill);
+            DiceManager.instance.Roll(dice);
+            //  TODO wait for response
+        }
         // Check if there's a follow-up node
         if (!response.nextNode.IsLastNode())
         {
