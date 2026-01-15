@@ -13,7 +13,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject responseButtonPrefab; // Prefab for generating response buttons
     public Transform responseButtonContainer; // Container to hold response buttons
     private DialogueNode parentNode;
-    private Quaternion originalRotation;
+    private Vector3 originalPosition;
 
     private void Awake()
     {
@@ -35,10 +35,9 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(string title, DialogueNode node, GameObject npc)
     {
         // Turn to player
-        originalRotation = npc.transform.rotation;
-        Transform player = GameObject.FindGameObjectWithTag("Player").transform;
-        Vector3 targetPosition = new Vector3(player.position.x, transform.position.y, player.position.z);
-        npc.transform.LookAt(targetPosition);
+        originalPosition = npc.transform.position;
+        npc.GetComponent<NPC>().RotateTowards(GameObject.FindGameObjectWithTag("Player").transform.position);
+        //  Set parent dialog node
         parentNode = node;
         //  Stop all audio
         //  TODO add tags for npcs to audio source to find
@@ -68,7 +67,7 @@ public class DialogueManager : MonoBehaviour
             {
                 // If no follow-up node, end the dialogue
                 HideDialogue();
-                npc.transform.rotation = originalRotation;
+                npc.GetComponent<NPC>().ResetRotation();
                 npc.GetComponent<NPC>().audioSource.UnPause();
             }
         }
