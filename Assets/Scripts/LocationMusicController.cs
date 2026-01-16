@@ -3,6 +3,7 @@ using UnityEngine;
 public class LocationMusicController : MonoBehaviour
 {
 
+    public AudioSource audioSource;
     public AudioClip clip;
     private bool isOnTarget = false;
     private bool isPlaying = false;
@@ -29,17 +30,26 @@ public class LocationMusicController : MonoBehaviour
     {
         if (isOnTarget && !isPlaying)
         {
-            MusicPlayer.instance.PlayMusic(clip);
+            PlayMusic(clip);
             isPlaying = true;
             return;
         }
 
         if (!isOnTarget && isPlaying)
         {
-            MusicPlayer.instance.PauseMusic();
+            PauseMusic();
             isPlaying = false;
             return;
         }
 
+    }
+    public void PlayMusic(AudioClip clip)
+    {
+        audioSource.clip = clip;
+        audioSource.Play();
+    }
+    public void PauseMusic()
+    {
+        audioSource.Pause();
     }
 }
