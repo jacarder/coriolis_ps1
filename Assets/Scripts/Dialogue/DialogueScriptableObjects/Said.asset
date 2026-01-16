@@ -21,10 +21,14 @@ MonoBehaviour:
         dialogueText: Yes child I am. We are all the Martyrs children.
         clip: {fileID: 0}
         responses:
-        - responseText: Tell me more
+        - responseText: Give me all your money
           nextNode:
             dialogueText: 
             clip: {fileID: 0}
             responses: []
+          isSkillCheck: 1
+          skill: 1
           returnToParent: 0
+      isSkillCheck: 0
+      skill: 0
       returnToParent: 0
