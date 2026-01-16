@@ -7,19 +7,19 @@ public class LocationMusicController : MonoBehaviour
     private bool isOnTarget = false;
     private bool isPlaying = false;
 
-    void OnCollisionStay(Collision collision)
+    void OnTriggerEnter(Collider collider)
     {
         // Check if the object we are colliding with has the target tag
-        if (collision.gameObject.CompareTag("Player"))
+        if (collider.CompareTag("Player"))
         {
             isOnTarget = true;
         }
     }
 
-    void OnCollisionExit(Collision collision)
+    void OnTriggerExit(Collider collider)
     {
         // Reset when leaving the object
-        if (collision.gameObject.CompareTag("Player"))
+        if (collider.CompareTag("Player"))
         {
             isOnTarget = false;
         }
