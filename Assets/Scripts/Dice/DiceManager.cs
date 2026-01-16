@@ -6,6 +6,7 @@ using UnityEngine;
 public class DiceManager : MonoBehaviour
 {
     public static DiceManager instance;
+    public AudioClip rollDiceSound;
     [SerializeField] GameObject diePrefab;
     [SerializeField] Transform successDieContainer;
     [SerializeField] float timeBetweenRolls;
@@ -29,6 +30,7 @@ public class DiceManager : MonoBehaviour
         HUDController.instance.EnableDice();
         dice = CreateDice(numberOfDie);
         ShowDieResult();
+        AudioSource.PlayClipAtPoint(rollDiceSound, GameObject.FindGameObjectWithTag("Player").transform.position);
         StartCoroutine(DelayRoll(dice));
     }
     private IEnumerator DelayRoll(List<GameObject> dice)

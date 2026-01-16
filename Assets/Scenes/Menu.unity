@@ -1171,7 +1171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 032a95d2117d7b24dbb469d3fc5bfd9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayMusicOnLoad
-  musicClip: {fileID: 8300000, guid: 6c6c73f1483bb704fb1b4ae700bd102a, type: 3}
+  musicClip: {fileID: 8300000, guid: 5e599a12b0b58144c8400bd9e0eb7da4, type: 3}
   volume: 1
 --- !u!1 &1823499775
 GameObject:

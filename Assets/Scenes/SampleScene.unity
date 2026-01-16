@@ -2493,6 +2493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d4888f286780d94eb8082dc179c7d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DiceManager
+  rollDiceSound: {fileID: 8300000, guid: f362dc55bf064504eb058617162933d0, type: 3}
   diePrefab: {fileID: 6724180634534002349, guid: c165a4ab46602dc4cb1218be38b36b2a, type: 3}
   successDieContainer: {fileID: 321560278}
   timeBetweenRolls: 0.05
