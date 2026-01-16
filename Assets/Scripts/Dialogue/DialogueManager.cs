@@ -50,6 +50,7 @@ public class DialogueManager : MonoBehaviour
     // Handles response selection and triggers next dialogue node
     public void SelectResponse(DialogueResponse response, string title, GameObject npc)
     {
+        FirstPersonAudio.instance.StopDialogueAudio();
         if (response.isSkillCheck)
         {
             PlayerCharacter player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>();
@@ -114,6 +115,7 @@ public class DialogueManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         FirstPersonLook.instance.StartMovement();
         FirstPersonMovement.instance.StartMovement();
+        FirstPersonAudio.instance.StopDialogueAudio();
         DialogueParent.SetActive(false);
     }
 

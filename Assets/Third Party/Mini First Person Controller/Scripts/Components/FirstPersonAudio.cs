@@ -122,6 +122,7 @@ public class FirstPersonAudio : MonoBehaviour
     void PlayCrouchStartAudio() => PlayRandomClip(crouchStartAudio, crouchStartSFX);
     void PlayCrouchEndAudio() => PlayRandomClip(crouchEndAudio, crouchEndSFX);
     public void PlayDialogueAudio(AudioClip clip) => PlayDialogClip(dialogueAudio, clip);
+    public void StopDialogueAudio() => StopDialogClip(dialogueAudio);
     #endregion
 
     #region Subscribe/unsubscribe to events.
@@ -207,5 +208,10 @@ public class FirstPersonAudio : MonoBehaviour
         audio.clip = clip;
         audio.Play();
     }
-    #endregion 
+    public static void StopDialogClip(AudioSource audio)
+    {
+        // Play the clip.
+        audio.Stop();
+    }
+    #endregion
 }
