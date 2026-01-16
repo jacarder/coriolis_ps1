@@ -21,19 +21,19 @@ public class DiceManager : MonoBehaviour
         instance = this;
     }
 
-    public void Roll(int numberOfDie)
+    public void Roll(int numberOfDie, System.Action onFinished)
     {
         if (dice.Count() > 0)
         {
-            dice.ForEach(x => Destroy(x));
+            ClearDice();
         }
         HUDController.instance.EnableDice();
         dice = CreateDice(numberOfDie);
         ShowDieResult();
         AudioSource.PlayClipAtPoint(rollDiceSound, GameObject.FindGameObjectWithTag("Player").transform.position);
-        StartCoroutine(DelayRoll(dice));
+        StartCoroutine(DelayRoll(dice, onFinished));
     }
-    private IEnumerator DelayRoll(List<GameObject> dice)
+    private IEnumerator DelayRoll(List<GameObject> dice, System.Action onFinished)
     {
         GameObject currentDie = null;
         GameObject lastDie = dice.Last();
@@ -46,7 +46,13 @@ public class DiceManager : MonoBehaviour
                 // Vector3 initialScale = die.transform.localScale;
                 // die.transform.localScale = Vector3.Lerp(die.transform.position, initialScale * 2f, 0.5f * Time.deltaTime);
                 DiceSpinner spinner = die.GetComponentInChildren<DiceSpinner>();
-                spinner.RollToFace(Random.Range(1, 7));
+                spinner.RollToFace(Random.Range(1, 7), () =>
+                {
+                    if (die == dice.Last())
+                    {
+                        onFinished.Invoke();
+                    }
+                });
 
 
                 yield return new WaitForSeconds(timeBetweenRolls);
@@ -58,6 +64,9 @@ public class DiceManager : MonoBehaviour
     {
 
     }
+
+    public void ClearDice() =>
+        dice.ForEach(x => Destroy(x));
 
     private List<GameObject> CreateDice(int numberOfDie)
     {

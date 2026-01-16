@@ -24,15 +24,15 @@ public class DiceSpinner : MonoBehaviour
         Quaternion.Euler(90, 0, 0)     // 4
     };
 
-    public void RollToFace(int face)
+    public void RollToFace(int face, System.Action onFinished = null)
     {
         if (isSpinning || face < 1 || face > 6)
             return;
 
-        StartCoroutine(SpinAndStop(face));
+        StartCoroutine(SpinAndStop(face, onFinished));
     }
 
-    private IEnumerator SpinAndStop(int face)
+    private IEnumerator SpinAndStop(int face, System.Action onFinished)
     {
         isSpinning = true;
 
@@ -78,5 +78,6 @@ public class DiceSpinner : MonoBehaviour
 
         transform.rotation = targetRotation;
         isSpinning = false;
+        onFinished?.Invoke();
     }
 }

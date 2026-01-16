@@ -19,7 +19,6 @@ public class SceneTransition : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("made it");
         if (!isTransitioning)
             StartCoroutine(Transition());
     }

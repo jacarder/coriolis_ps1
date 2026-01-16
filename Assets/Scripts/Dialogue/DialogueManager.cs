@@ -55,8 +55,12 @@ public class DialogueManager : MonoBehaviour
         {
             PlayerCharacter player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>();
             int dice = player.characterStats.GetTotalDiceBySkill(response.skill);
-            DiceManager.instance.Roll(dice);
-            //  TODO wait for response
+            DiceManager.instance.Roll(dice, () =>
+            {
+                Debug.Log("dice roll finished");
+                //  TODO show result of success fail or crit via new method from dice manager to determine. 1-2 success, 3 crit, all else if fail
+                DiceManager.instance.ClearDice();
+            });
         }
         // Check if there's a follow-up node
         if (!response.nextNode.IsLastNode())
