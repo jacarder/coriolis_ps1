@@ -144,11 +144,21 @@ public class DialogueManager : MonoBehaviour
         // Create and setup response buttons based on current dialogue node
         foreach (DialogueResponse response in node.responses)
         {
-            GameObject buttonObj = Instantiate(responseButtonPrefab, responseButtonContainer);
-            buttonObj.GetComponentInChildren<TextMeshProUGUI>().text = response.responseText;
+            if (
+                IsDialogNormalDialogue(response) ||
+                (
+                    (response.startQuestId != "" && quests.Find(x => x.info.id == response.startQuestId).state == QuestState.CAN_START) ||
+                    (response.advancedQuestId != "" && quests.Find(x => x.info.id == response.advancedQuestId).state == QuestState.IN_PROGRESS) ||
+                    (response.finishQuestId != "" && quests.Find(x => x.info.id == response.finishQuestId).state == QuestState.CAN_FINISH)
+                )
+            )
+            {
+                GameObject buttonObj = Instantiate(responseButtonPrefab, responseButtonContainer);
+                buttonObj.GetComponentInChildren<TextMeshProUGUI>().text = response.responseText;
 
-            // Setup button to trigger SelectResponse when clicked
-            buttonObj.GetComponent<Button>().onClick.AddListener(() => SelectResponse(response, title, npc));
+                // Setup button to trigger SelectResponse when clicked
+                buttonObj.GetComponent<Button>().onClick.AddListener(() => SelectResponse(response, title, npc));
+            }
         }
     }
 
@@ -177,5 +187,10 @@ public class DialogueManager : MonoBehaviour
     public bool IsDialogueActive()
     {
         return DialogueParent.activeSelf;
+    }
+
+    private bool IsDialogNormalDialogue(DialogueResponse response)
+    {
+        return response.startQuestId == "" && response.advancedQuestId == "" && response.finishQuestId == "";
     }
 }
