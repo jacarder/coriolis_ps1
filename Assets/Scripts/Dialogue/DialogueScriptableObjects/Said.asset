@@ -34,9 +34,20 @@ MonoBehaviour:
           returnToParent: 0
         - responseText: Give me a quest
           nextNode:
-            dialogueText: 
+            dialogueText: Very well child. May the martyr protect.
             clip: {fileID: 0}
-            responses: []
+            responses:
+            - responseText: END
+              nextNode:
+                dialogueText: 
+                clip: {fileID: 0}
+                responses: []
+              isSkillCheck: 0
+              startQuestId: 
+              advancedQuestId: 
+              finishQuestId: 
+              skill: 0
+              returnToParent: 0
           isSkillCheck: 0
           startQuestId: TalkToSaid
           advancedQuestId: 
@@ -47,7 +58,18 @@ MonoBehaviour:
           nextNode:
             dialogueText: 
             clip: {fileID: 0}
-            responses: []
+            responses:
+            - responseText: END
+              nextNode:
+                dialogueText: 
+                clip: {fileID: 0}
+                responses: []
+              isSkillCheck: 0
+              startQuestId: 
+              advancedQuestId: 
+              finishQuestId: 
+              skill: 0
+              returnToParent: 0
           isSkillCheck: 0
           startQuestId: 
           advancedQuestId: TalkToSaid
@@ -56,9 +78,20 @@ MonoBehaviour:
           returnToParent: 0
         - responseText: Finish Quest
           nextNode:
-            dialogueText: 
+            dialogueText: You have done well child. The Martyr blesses you.
             clip: {fileID: 0}
-            responses: []
+            responses:
+            - responseText: END
+              nextNode:
+                dialogueText: 
+                clip: {fileID: 0}
+                responses: []
+              isSkillCheck: 0
+              startQuestId: 
+              advancedQuestId: 
+              finishQuestId: 
+              skill: 0
+              returnToParent: 0
           isSkillCheck: 0
           startQuestId: 
           advancedQuestId: 
@@ -67,6 +100,28 @@ MonoBehaviour:
           returnToParent: 0
       isSkillCheck: 0
       startQuestId: 
+      advancedQuestId: 
+      finishQuestId: 
+      skill: 0
+      returnToParent: 0
+    - responseText: I am ready for my next quest
+      nextNode:
+        dialogueText: Ah you remind me of the great prophet Kamrah. Good luck!
+        clip: {fileID: 0}
+        responses:
+        - responseText: END
+          nextNode:
+            dialogueText: 
+            clip: {fileID: 0}
+            responses: []
+          isSkillCheck: 0
+          startQuestId: 
+          advancedQuestId: 
+          finishQuestId: 
+          skill: 0
+          returnToParent: 0
+      isSkillCheck: 1
+      startQuestId: TalkToSaid2
       advancedQuestId: 
       finishQuestId: 
       skill: 0
