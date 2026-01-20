@@ -27,8 +27,47 @@ MonoBehaviour:
             clip: {fileID: 0}
             responses: []
           isSkillCheck: 1
+          startQuestId: 
+          advancedQuestId: 
+          finishQuestId: 
+          skill: 1
+          returnToParent: 0
+        - responseText: Give me a quest
+          nextNode:
+            dialogueText: 
+            clip: {fileID: 0}
+            responses: []
+          isSkillCheck: 0
+          startQuestId: TalkToSaid
+          advancedQuestId: 
+          finishQuestId: 
+          skill: 1
+          returnToParent: 0
+        - responseText: Advance Quest
+          nextNode:
+            dialogueText: 
+            clip: {fileID: 0}
+            responses: []
+          isSkillCheck: 0
+          startQuestId: 
+          advancedQuestId: TalkToSaid
+          finishQuestId: 
+          skill: 1
+          returnToParent: 0
+        - responseText: Finish Quest
+          nextNode:
+            dialogueText: 
+            clip: {fileID: 0}
+            responses: []
+          isSkillCheck: 0
+          startQuestId: 
+          advancedQuestId: 
+          finishQuestId: TalkToSaid
           skill: 1
           returnToParent: 0
       isSkillCheck: 0
+      startQuestId: 
+      advancedQuestId: 
+      finishQuestId: 
       skill: 0
       returnToParent: 0

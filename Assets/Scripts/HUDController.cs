@@ -11,10 +11,32 @@ public class HUDController : MonoBehaviour
         DisableDialog();
     }
     [SerializeField] TMP_Text interactionText;
+    [SerializeField] TMP_Text questText;
     [SerializeField] GameObject dialoguePanel;
     [SerializeField] GameObject dice;
     [SerializeField] GameObject diceResultsContainer;
     [SerializeField] Camera dicCamera;
+
+    private void OnEnable()
+    {
+        GameEventsManager.instance.questEvents.onQuestStateChange += displayQuestText;
+    }
+    private void OnDisable()
+    {
+        GameEventsManager.instance.questEvents.onQuestStateChange -= displayQuestText;
+    }
+
+    private void displayQuestText(Quest quest)
+    {
+        if (quest.state == QuestState.IN_PROGRESS)
+        {
+            questText.text = "Quest in Progress: " + quest.info.displayName;
+        }
+        else if (quest.state == QuestState.FINISHED)
+        {
+            questText.text = "Quest Finished: " + quest.info.displayName;
+        }
+    }
 
     public void EnableInteractionText(string text)
     {

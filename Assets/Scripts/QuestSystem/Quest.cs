@@ -35,7 +35,7 @@ public class Quest
 
     public bool CurrentStepExists()
     {
-        return (currentQuestStepIndex < info.questStepPrefabs.Length);
+        return currentQuestStepIndex < info.questStepPrefabs.Length;
     }
 
     public void InstantiateCurrentQuestStep(Transform parentTransform)

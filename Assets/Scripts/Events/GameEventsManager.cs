@@ -4,6 +4,7 @@ public class GameEventsManager : MonoBehaviour
 {
     public static GameEventsManager instance { get; private set; }
     public QuestEvents questEvents;
+    public DialogueEvents dialogEvents;
     private void Awake()
     {
         if (instance != null)
@@ -12,5 +13,6 @@ public class GameEventsManager : MonoBehaviour
         }
         instance = this;
         questEvents = new QuestEvents();
+        dialogEvents = new DialogueEvents();
     }
 }

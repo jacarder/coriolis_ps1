@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f57d5a54c43c01c47b9e9af01e8f37be, type: 3}
-  m_Name: TalkToSaid
+  m_Name: TalkToSaid2
   m_EditorClassIdentifier: Assembly-CSharp::QuestInfoSO
-  <id>k__BackingField: TalkToSaid
-  displayName: Talk to Said
-  questPrerequites: []
+  <id>k__BackingField: TalkToSaid2
+  displayName: Talk to Said 2
+  questPrerequites:
+  - {fileID: 11400000, guid: 1fe1242509e11cb48a2bd2b240013fce, type: 2}
   questStepPrefabs:
-  - {fileID: 3462568367170121281, guid: f8961ad06cc3b4447b1fec667abff6d8, type: 3}
   - {fileID: 3462568367170121281, guid: f8961ad06cc3b4447b1fec667abff6d8, type: 3}
   reward: []
   experience: 2

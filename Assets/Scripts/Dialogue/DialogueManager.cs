@@ -14,6 +14,8 @@ public class DialogueManager : MonoBehaviour
     public Transform responseButtonContainer; // Container to hold response buttons
     private DialogueNode parentNode;
 
+    private QuestState currentQuestState;
+
     private void Awake()
     {
         // Singleton pattern to ensure only one instance of DialogueManager
@@ -28,6 +30,21 @@ public class DialogueManager : MonoBehaviour
 
         // Initially hide the dialogue UI
         HideDialogue();
+    }
+
+    private void OnEnable()
+    {
+        GameEventsManager.instance.questEvents.onQuestStateChange += QuestStateChange;
+    }
+
+    private void OnDisable()
+    {
+        GameEventsManager.instance.questEvents.onQuestStateChange -= QuestStateChange;
+    }
+
+    private void QuestStateChange(Quest quest)
+    {
+        currentQuestState = quest.state;
     }
 
     // Starts the dialogue with given title and dialogue node
@@ -61,6 +78,19 @@ public class DialogueManager : MonoBehaviour
                 //  TODO show result of success fail or crit via new method from dice manager to determine. 1-2 success, 3 crit, all else if fail
                 DiceManager.instance.ClearDice();
             });
+        }
+        //  Response is accepting the quest
+        if (response.startQuestId != "")
+        {
+            GameEventsManager.instance.questEvents.StartQuest(response.startQuestId);
+        }
+        if (response.advancedQuestId != "")
+        {
+            GameEventsManager.instance.dialogEvents.ResponseRelatedQuest(response.advancedQuestId);
+        }
+        if (response.finishQuestId != "" && currentQuestState == QuestState.CAN_FINISH)
+        {
+            GameEventsManager.instance.questEvents.FinishQuest(response.finishQuestId);
         }
         // Check if there's a follow-up node
         if (!response.nextNode.IsLastNode())
