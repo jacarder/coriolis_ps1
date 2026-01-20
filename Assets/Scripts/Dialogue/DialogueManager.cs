@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading;
 using TMPro;
 using UnityEngine;
@@ -14,7 +15,7 @@ public class DialogueManager : MonoBehaviour
     public Transform responseButtonContainer; // Container to hold response buttons
     private DialogueNode parentNode;
 
-    private QuestState currentQuestState;
+    private List<Quest> quests = new List<Quest>();
 
     private void Awake()
     {
@@ -44,7 +45,11 @@ public class DialogueManager : MonoBehaviour
 
     private void QuestStateChange(Quest quest)
     {
-        currentQuestState = quest.state;
+        Quest currentQuest = quests.Find(x => x.info.id == quest.info.id);
+        if (currentQuest == null)
+        {
+            quests.Add(quest);
+        }
     }
 
     // Starts the dialogue with given title and dialogue node
@@ -88,9 +93,14 @@ public class DialogueManager : MonoBehaviour
         {
             GameEventsManager.instance.dialogEvents.ResponseRelatedQuest(response.advancedQuestId);
         }
-        if (response.finishQuestId != "" && currentQuestState == QuestState.CAN_FINISH)
+        if (response.finishQuestId != "")
         {
-            GameEventsManager.instance.questEvents.FinishQuest(response.finishQuestId);
+            Quest quest = quests.Find(x => x.info.id == response.finishQuestId);
+            //  TODO maybe find a way to only show response when CAN_FINISH
+            if (quest.state == QuestState.CAN_FINISH)
+            {
+                GameEventsManager.instance.questEvents.FinishQuest(response.finishQuestId);
+            }
         }
         // Check if there's a follow-up node
         if (!response.nextNode.IsLastNode())

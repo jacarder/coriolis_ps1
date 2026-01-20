@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -16,27 +17,6 @@ public class HUDController : MonoBehaviour
     [SerializeField] GameObject dice;
     [SerializeField] GameObject diceResultsContainer;
     [SerializeField] Camera dicCamera;
-
-    private void OnEnable()
-    {
-        GameEventsManager.instance.questEvents.onQuestStateChange += displayQuestText;
-    }
-    private void OnDisable()
-    {
-        GameEventsManager.instance.questEvents.onQuestStateChange -= displayQuestText;
-    }
-
-    private void displayQuestText(Quest quest)
-    {
-        if (quest.state == QuestState.IN_PROGRESS)
-        {
-            questText.text = "Quest in Progress: " + quest.info.displayName;
-        }
-        else if (quest.state == QuestState.FINISHED)
-        {
-            questText.text = "Quest Finished: " + quest.info.displayName;
-        }
-    }
 
     public void EnableInteractionText(string text)
     {
