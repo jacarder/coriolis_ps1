@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: TalkToSaid
   m_EditorClassIdentifier: Assembly-CSharp::QuestInfoSO
   <id>k__BackingField: TalkToSaid
-  displayName: Talk to Said
+  displayName: Share the word of the Martyr
   questPrerequites: []
   questStepPrefabs:
-  - {fileID: 3462568367170121281, guid: f8961ad06cc3b4447b1fec667abff6d8, type: 3}
   - {fileID: 3462568367170121281, guid: f8961ad06cc3b4447b1fec667abff6d8, type: 3}
   reward: []
   experience: 2

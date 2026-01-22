@@ -34,7 +34,8 @@ MonoBehaviour:
           returnToParent: 0
         - responseText: Give me a quest
           nextNode:
-            dialogueText: Very well child. May the martyr protect.
+            dialogueText: Very well child. Tell the legionarrie about the Martyrs
+              blessing.
             clip: {fileID: 0}
             responses:
             - responseText: END
@@ -51,28 +52,6 @@ MonoBehaviour:
           isSkillCheck: 0
           startQuestId: TalkToSaid
           advancedQuestId: 
-          finishQuestId: 
-          skill: 1
-          returnToParent: 0
-        - responseText: Advance Quest
-          nextNode:
-            dialogueText: 
-            clip: {fileID: 0}
-            responses:
-            - responseText: END
-              nextNode:
-                dialogueText: 
-                clip: {fileID: 0}
-                responses: []
-              isSkillCheck: 0
-              startQuestId: 
-              advancedQuestId: 
-              finishQuestId: 
-              skill: 0
-              returnToParent: 0
-          isSkillCheck: 0
-          startQuestId: 
-          advancedQuestId: TalkToSaid
           finishQuestId: 
           skill: 1
           returnToParent: 0

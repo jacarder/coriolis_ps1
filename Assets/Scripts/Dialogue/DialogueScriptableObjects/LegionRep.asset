@@ -35,13 +35,28 @@ MonoBehaviour:
                 dialogueText: 
                 clip: {fileID: 0}
                 responses: []
+              isSkillCheck: 0
+              startQuestId: 
+              advancedQuestId: 
+              finishQuestId: 
+              skill: 0
               returnToParent: 0
             - responseText: Who were they?
               nextNode:
                 dialogueText: 
                 clip: {fileID: 0}
                 responses: []
+              isSkillCheck: 0
+              startQuestId: 
+              advancedQuestId: 
+              finishQuestId: 
+              skill: 0
               returnToParent: 0
+          isSkillCheck: 0
+          startQuestId: 
+          advancedQuestId: 
+          finishQuestId: 
+          skill: 0
           returnToParent: 0
         - responseText: I get results
           nextNode:
@@ -51,5 +66,37 @@ MonoBehaviour:
               like mysteries.\u201D"
             clip: {fileID: 8300000, guid: 0f5ba1494baf5d342b94b5f85da854b1, type: 3}
             responses: []
+          isSkillCheck: 0
+          startQuestId: 
+          advancedQuestId: 
+          finishQuestId: 
+          skill: 0
           returnToParent: 0
+      isSkillCheck: 0
+      startQuestId: 
+      advancedQuestId: 
+      finishQuestId: 
+      skill: 0
+      returnToParent: 0
+    - responseText: The Martyrs word is truth. You should talk to Said.
+      nextNode:
+        dialogueText: '"Get lost. You are just as crazy as Said."'
+        clip: {fileID: 0}
+        responses:
+        - responseText: END
+          nextNode:
+            dialogueText: 
+            clip: {fileID: 0}
+            responses: []
+          isSkillCheck: 0
+          startQuestId: 
+          advancedQuestId: 
+          finishQuestId: 
+          skill: 0
+          returnToParent: 0
+      isSkillCheck: 0
+      startQuestId: 
+      advancedQuestId: TalkToSaid
+      finishQuestId: 
+      skill: 0
       returnToParent: 0
