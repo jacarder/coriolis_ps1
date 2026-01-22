@@ -94,12 +94,12 @@ Material:
     - _DitherMode: 0
     - _FilterMode: 1
     - _LightMode: 1
-    - _ResolutionLimit: 256
+    - _ResolutionLimit: 75
     - _SnapMode: 2
     - _SnapsPerUnit: 64
     m_Floats:
     - _AddPrecomputedVelocity: 0
-    - _AffineTextureStrength: 1
+    - _AffineTextureStrength: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _AmbientLight: 0.02
