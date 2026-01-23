@@ -52,7 +52,9 @@ public class DiceManager : MonoBehaviour
                 {
                     if (die == dice.Last())
                     {
-                        onFinished.Invoke(GetDiceRollResults(diceRolls));
+                        DiceResult diceResult = GetDiceRollResults(diceRolls);
+                        GameEventsManager.instance.diceEvents.DiceRollResponse(diceResult);
+                        onFinished.Invoke(diceResult);
                     }
                 });
 
