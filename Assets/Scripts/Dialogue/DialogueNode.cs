@@ -6,6 +6,8 @@ using UnityEngine;
 public class DialogueNode
 {
 	public string dialogueText;
+	public string dialogueCriticalText;
+	public string dialogueFailText;
 	public AudioClip clip;
 	public List<DialogueResponse> responses;
 

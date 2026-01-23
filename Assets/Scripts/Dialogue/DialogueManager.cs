@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using TMPro;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -70,20 +72,29 @@ public class DialogueManager : MonoBehaviour
     }
 
     // Handles response selection and triggers next dialogue node
-    public void SelectResponse(DialogueResponse response, string title, GameObject npc)
+    public void HandleSelectResponse(DialogueResponse response, string title, GameObject npc)
     {
         FirstPersonAudio.instance.StopDialogueAudio();
         if (response.isSkillCheck)
         {
             PlayerCharacter player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>();
             int dice = player.characterStats.GetTotalDiceBySkill(response.skill);
-            DiceManager.instance.Roll(dice, () =>
+            DiceManager.instance.Roll(dice, (diceResult) =>
             {
                 Debug.Log("dice roll finished");
                 //  TODO show result of success fail or crit via new method from dice manager to determine. 1-2 success, 3 crit, all else if fail
+                SelectResponse(response, title, npc, diceResult);
                 DiceManager.instance.ClearDice();
             });
         }
+        else
+        {
+            SelectResponse(response, title, npc);
+        }
+    }
+
+    private void SelectResponse(DialogueResponse response, string title, GameObject npc, DiceResult diceResult = null)
+    {
         //  Response is accepting the quest
         if (response.startQuestId != "")
         {
@@ -96,7 +107,6 @@ public class DialogueManager : MonoBehaviour
         if (response.finishQuestId != "")
         {
             Quest quest = quests.Find(x => x.info.id == response.finishQuestId);
-            //  TODO maybe find a way to only show response when CAN_FINISH
             if (quest.state == QuestState.CAN_FINISH)
             {
                 GameEventsManager.instance.questEvents.FinishQuest(response.finishQuestId);
@@ -105,13 +115,13 @@ public class DialogueManager : MonoBehaviour
         // Check if there's a follow-up node
         if (!response.nextNode.IsLastNode())
         {
-            GetDialogue(title, response.nextNode, npc); // Start next dialogue
+            GetDialogue(title, response.nextNode, npc, diceResult); // Start next dialogue
         }
         else
         {
             if (response.returnToParent)
             {
-                GetDialogue(title, parentNode, npc); // Start next dialogue
+                GetDialogue(title, parentNode, npc, diceResult); // Start next dialogue
             }
             else
             {
@@ -123,11 +133,35 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void GetDialogue(string title, DialogueNode node, GameObject npc)
+    private string SelectDialogue(DialogueNode node, DiceResult diceResult)
+    {
+        string dialogue = node.dialogueText;
+        if (diceResult == null)
+        {
+            return dialogue;
+        }
+        else
+        {
+            switch (diceResult.result)
+            {
+                case DiceSuccessState.CRITICAL_SUCCESS:
+                    return !String.IsNullOrEmpty(node.dialogueCriticalText) ? node.dialogueCriticalText : dialogue;
+                case DiceSuccessState.LIMITED_SUCCESS:
+                    return dialogue;
+                case DiceSuccessState.FAILURE:
+                    return !String.IsNullOrEmpty(node.dialogueFailText) ? node.dialogueFailText : dialogue;
+                default:
+                    throw new ArgumentOutOfRangeException(
+                        "Unexpected DiceSuccessState."
+                    );
+            }
+        }
+    }
+    private void GetDialogue(string title, DialogueNode node, GameObject npc, DiceResult diceResult = null)
     {
         // Set dialogue title and body text
         DialogTitleText.text = title;
-        DialogBodyText.text = node.dialogueText;
+        DialogBodyText.text = SelectDialogue(node, diceResult);
 
         //  Play dialogue audio clip
         if (node.clip)
@@ -157,7 +191,7 @@ public class DialogueManager : MonoBehaviour
                 buttonObj.GetComponentInChildren<TextMeshProUGUI>().text = response.responseText;
 
                 // Setup button to trigger SelectResponse when clicked
-                buttonObj.GetComponent<Button>().onClick.AddListener(() => SelectResponse(response, title, npc));
+                buttonObj.GetComponent<Button>().onClick.AddListener(() => HandleSelectResponse(response, title, npc));
             }
         }
     }

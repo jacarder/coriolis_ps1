@@ -21,7 +21,7 @@ public class DiceManager : MonoBehaviour
         instance = this;
     }
 
-    public void Roll(int numberOfDie, System.Action onFinished)
+    public void Roll(int numberOfDie, System.Action<DiceResult> onFinished)
     {
         if (dice.Count() > 0)
         {
@@ -29,12 +29,12 @@ public class DiceManager : MonoBehaviour
         }
         HUDController.instance.EnableDice();
         dice = CreateDice(numberOfDie);
-        ShowDieResult();
         AudioSource.PlayClipAtPoint(rollDiceSound, GameObject.FindGameObjectWithTag("Player").transform.position);
         StartCoroutine(DelayRoll(dice, onFinished));
     }
-    private IEnumerator DelayRoll(List<GameObject> dice, System.Action onFinished)
+    private IEnumerator DelayRoll(List<GameObject> dice, System.Action<DiceResult> onFinished)
     {
+        List<int> diceRolls = new List<int>();
         GameObject currentDie = null;
         GameObject lastDie = dice.Last();
         while (currentDie != lastDie)
@@ -46,11 +46,13 @@ public class DiceManager : MonoBehaviour
                 // Vector3 initialScale = die.transform.localScale;
                 // die.transform.localScale = Vector3.Lerp(die.transform.position, initialScale * 2f, 0.5f * Time.deltaTime);
                 DiceSpinner spinner = die.GetComponentInChildren<DiceSpinner>();
-                spinner.RollToFace(Random.Range(1, 7), () =>
+                int dieRoll = Random.Range(1, 7);
+                diceRolls.Add(dieRoll);
+                spinner.RollToFace(dieRoll, () =>
                 {
                     if (die == dice.Last())
                     {
-                        onFinished.Invoke();
+                        onFinished.Invoke(GetDiceRollResults(diceRolls));
                     }
                 });
 
@@ -60,9 +62,19 @@ public class DiceManager : MonoBehaviour
             }
         }
     }
-    private void ShowDieResult()
+    private DiceResult GetDiceRollResults(List<int> diceRolls)
     {
-
+        int numberOfSixes = diceRolls.Count(x => x == 6);
+        DiceSuccessState state = DiceSuccessState.FAILURE;
+        if (numberOfSixes >= 3)
+        {
+            state = DiceSuccessState.CRITICAL_SUCCESS;
+        }
+        else if (numberOfSixes < 3 && numberOfSixes >= 1)
+        {
+            state = DiceSuccessState.LIMITED_SUCCESS;
+        }
+        return new DiceResult { numberOfSuccesses = numberOfSixes, result = state };
     }
 
     public void ClearDice() =>

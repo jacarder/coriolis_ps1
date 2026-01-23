@@ -14,18 +14,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue
   RootNode:
     dialogueText: Why, hello there friend. May the Martyr bless you.
+    dialogueCriticalText: 
+    dialogueFailText: 
     clip: {fileID: 0}
     responses:
     - responseText: Are you a Samaritan?
       nextNode:
         dialogueText: Yes child I am. We are all the Martyrs children.
+        dialogueCriticalText: 
+        dialogueFailText: 
         clip: {fileID: 0}
         responses:
         - responseText: Give me all your money
           nextNode:
-            dialogueText: 
+            dialogueText: '"If money is what you need, then here''s two birr for
+              you.'
+            dialogueCriticalText: '"Please, not in a place of worship. Here, take
+              all that I have."'
+            dialogueFailText: '"The Martyr protects. I fear nothing from you so long
+              as the Martyr protects."'
             clip: {fileID: 0}
-            responses: []
+            responses:
+            - responseText: END
+              nextNode:
+                dialogueText: 
+                dialogueCriticalText: 
+                dialogueFailText: 
+                clip: {fileID: 0}
+                responses: []
+              isSkillCheck: 0
+              startQuestId: 
+              advancedQuestId: 
+              finishQuestId: 
+              skill: 0
+              returnToParent: 0
           isSkillCheck: 1
           startQuestId: 
           advancedQuestId: 
@@ -36,11 +58,15 @@ MonoBehaviour:
           nextNode:
             dialogueText: Very well child. Tell the legionarrie about the Martyrs
               blessing.
+            dialogueCriticalText: 
+            dialogueFailText: 
             clip: {fileID: 0}
             responses:
             - responseText: END
               nextNode:
                 dialogueText: 
+                dialogueCriticalText: 
+                dialogueFailText: 
                 clip: {fileID: 0}
                 responses: []
               isSkillCheck: 0
@@ -58,11 +84,15 @@ MonoBehaviour:
         - responseText: Finish Quest
           nextNode:
             dialogueText: You have done well child. The Martyr blesses you.
+            dialogueCriticalText: 
+            dialogueFailText: 
             clip: {fileID: 0}
             responses:
             - responseText: END
               nextNode:
                 dialogueText: 
+                dialogueCriticalText: 
+                dialogueFailText: 
                 clip: {fileID: 0}
                 responses: []
               isSkillCheck: 0
@@ -86,11 +116,15 @@ MonoBehaviour:
     - responseText: I am ready for my next quest
       nextNode:
         dialogueText: Ah you remind me of the great prophet Kamrah. Good luck!
+        dialogueCriticalText: 
+        dialogueFailText: 
         clip: {fileID: 0}
         responses:
         - responseText: END
           nextNode:
             dialogueText: 
+            dialogueCriticalText: 
+            dialogueFailText: 
             clip: {fileID: 0}
             responses: []
           isSkillCheck: 0

@@ -12,9 +12,10 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _ALPHATEST_ON
   - _DITHERMODE_SCREEN
   - _FILTERMODE_POINT
-  - _LIGHTMODE_TEXELLIT
+  - _LIGHTMODE_UNLIT
   - _SNAPMODE_WORLD
   m_InvalidKeywords:
   - _USE_VERTEX_COLORS_OFF
@@ -94,14 +95,14 @@ Material:
     - _ColorBitDepth: 64
     - _DitherMode: 0
     - _FilterMode: 1
-    - _LightMode: 1
+    - _LightMode: 3
     - _ResolutionLimit: 256
     - _SnapMode: 1
     - _SnapsPerUnit: 64
     m_Floats:
     - _AddPrecomputedVelocity: 0
     - _AffineTextureStrength: 1
-    - _AlphaClip: 0
+    - _AlphaClip: 1
     - _AlphaToMask: 0
     - _AmbientLight: 0.02
     - _Blend: 0
