@@ -13,6 +13,7 @@ public class DialogButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         text = GetComponent<TMP_Text>();
         originalTextColor = text.color;
+        Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
