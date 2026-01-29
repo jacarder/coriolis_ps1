@@ -40,15 +40,15 @@ public class DiceResultNotification : MonoBehaviour
         {
             case DiceSuccessState.CRITICAL_SUCCESS:
                 audioSource.PlayOneShot(criticalClip);
-                notification.text = "Critical Success!";
+                notification.text = "Critical Success";
                 break;
             case DiceSuccessState.LIMITED_SUCCESS:
                 audioSource.PlayOneShot(limitedSuccessClip);
-                notification.text = "Limited Success!";
+                notification.text = "Limited Success";
                 break;
             case DiceSuccessState.FAILURE:
                 audioSource.PlayOneShot(failureClip);
-                notification.text = "Failure!";
+                notification.text = "Failure";
                 break;
         }
         notification.ForceMeshUpdate();

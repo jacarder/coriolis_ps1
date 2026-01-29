@@ -188,7 +188,7 @@ public class DialogueManager : MonoBehaviour
             )
             {
                 GameObject buttonObj = Instantiate(responseButtonPrefab, responseButtonContainer);
-                buttonObj.GetComponentInChildren<TextMeshProUGUI>().text = response.responseText;
+                buttonObj.GetComponentInChildren<TextMeshProUGUI>().text = "\u2022 " + response.responseText;
 
                 // Setup button to trigger SelectResponse when clicked
                 buttonObj.GetComponent<Button>().onClick.AddListener(() => HandleSelectResponse(response, title, npc));
