@@ -97,7 +97,7 @@ Material:
     - _LightMode: 1
     - _ResolutionLimit: 0
     - _SnapMode: 2
-    - _SnapsPerUnit: 200
+    - _SnapsPerUnit: 150
     m_Floats:
     - _AddPrecomputedVelocity: 0
     - _AffineTextureStrength: 0

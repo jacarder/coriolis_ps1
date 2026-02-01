@@ -199,6 +199,7 @@ public class DialogueManager : MonoBehaviour
     // Hide the dialogue UI
     public void HideDialogue()
     {
+        MouseController.instance.HideMouse();
         CameraController.instance.EndNPCInteraction();
         Cursor.lockState = CursorLockMode.Locked;
         FirstPersonLook.instance.StartMovement();
@@ -210,6 +211,7 @@ public class DialogueManager : MonoBehaviour
     // Show the dialogue UI
     private void ShowDialogue(GameObject npc)
     {
+        MouseController.instance.ShowMouse();
         CameraController.instance.StartNPCInteraction(npc.GetComponent<NPC>().npcFocusPoint.transform);
         Cursor.lockState = CursorLockMode.None;
         FirstPersonLook.instance.StopMovement();

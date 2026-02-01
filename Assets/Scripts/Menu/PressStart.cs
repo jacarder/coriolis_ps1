@@ -10,6 +10,7 @@ public class PressStart : MonoBehaviour
 
     void Awake()
     {
+        MouseController.instance.ShowMouse();
         originalScale = transform.localScale;
     }
 
