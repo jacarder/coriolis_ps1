@@ -12,10 +12,13 @@ public class MouseController : MonoBehaviour
 
     public void ShowMouse()
     {
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
     }
     public void HideMouse()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
     private void SetMouseTexture()

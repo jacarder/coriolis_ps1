@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 0aaddf3fa16c4614c8b9ca97098f2abd
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 262487
+  packageName: cyberpunk - Tall City (URP)
+  packageVersion: 1.0
+  assetPath: Assets/TallCity/Scripts/GCProbeCotrol.cs
+  uploadId: 609142

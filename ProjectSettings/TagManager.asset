@@ -9,7 +9,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Menu
   - Water
   - UI
   - 3DUI
@@ -41,6 +41,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Menu
+    uniqueID: 3445862843
+    locked: 0
+  - name: UI
+    uniqueID: 3462129077
     locked: 0
   m_RenderingLayers:
   - Default

@@ -3,7 +3,12 @@ guid: c34d6a6af0a9b444b8a477c31fbda6e7
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Decal_White
+    second: {fileID: 2100000, guid: fd88f03300ea0564096f6e2c1854d402, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

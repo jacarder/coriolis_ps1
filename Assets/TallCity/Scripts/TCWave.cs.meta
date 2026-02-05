@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f15ffe241272ea143b1923d154909380
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 262487
+  packageName: cyberpunk - Tall City (URP)
+  packageVersion: 1.0
+  assetPath: Assets/TallCity/Scripts/TCWave.cs
+  uploadId: 609142

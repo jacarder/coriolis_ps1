@@ -3,7 +3,22 @@ guid: be29744fd5bcc514ea53b685bd507a5a
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_Trim_01
+    second: {fileID: 2100000, guid: ae2244db250370c478dc20513da87709, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Black
+    second: {fileID: 2100000, guid: e524769b434525f478b0fd30f26b0b76, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Decal_Screen
+    second: {fileID: 2100000, guid: 89dfae1bafc30614485afe6d9bedf419, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

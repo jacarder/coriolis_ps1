@@ -1384,7 +1384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SceneTransition
   fadeImage: {fileID: 205966233}
   fadeDuration: 1.5
-  sceneToLoad: SampleScene
+  sceneToLoad: Neoptra_Spaceport
 --- !u!61 &1937045466
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6e520b78cc5bf4b41b9e8f4eb4acecad
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 262487
+  packageName: cyberpunk - Tall City (URP)
+  packageVersion: 1.0
+  assetPath: Assets/TallCity/Universal Render Pipeline Asset_Renderer.asset
+  uploadId: 609142

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: e44e97575df8655408f5fe103a84da1e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 262487
+  packageName: cyberpunk - Tall City (URP)
+  packageVersion: 1.0
+  assetPath: Assets/TallCity/Scripts/Traffic/HCTraffic.cs
+  uploadId: 609142

@@ -201,7 +201,6 @@ public class DialogueManager : MonoBehaviour
     {
         MouseController.instance.HideMouse();
         CameraController.instance.EndNPCInteraction();
-        Cursor.lockState = CursorLockMode.Locked;
         FirstPersonLook.instance.StartMovement();
         FirstPersonMovement.instance.StartMovement();
         FirstPersonAudio.instance.StopDialogueAudio();
