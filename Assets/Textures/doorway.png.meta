@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-guid: 888ff3ef31270ed49b919262c120f082
-AssetOrigin:
-  serializedVersion: 1
-  productId: 262487
-  packageName: cyberpunk - Tall City (URP)
-  packageVersion: 1.0
-  assetPath: Assets/TallCity/Textures/subs mesh_cableprobes_AlbedoTransparency.png
-  uploadId: 609142
+guid: 5e9d323d83336d44097e4f9c0d11c97b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +65,7 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
