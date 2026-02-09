@@ -1,24 +1,26 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
-public class MissionStateImage : MonoBehaviour
+[RequireComponent(typeof(TextMeshProUGUI))]
+[RequireComponent(typeof(AudioSource))]
+public class MissionStateNotification : MonoBehaviour
 {
-    [Header("State Materials")]
-    public Material missionStartedMaterial;
-    public Material missionCompleteMaterial;
-    public Material missionFailedMaterial;
+    [Header("Mission Text")]
+    public string missionStartedText = "MISSION START";
+    public string missionSuccessText = "MISSION SUCCESS";
+    public string missionFailedText = "MISSION FAILED";
 
-    [Header("Fade Settings")]
-    public float defaultFadeInDuration = 1.5f;
+    [Header("Timing Defaults")]
+    public float defaultFadeInDuration = 1.2f;
     public float defaultHoldDuration = 2.0f;
-    public float defaultFadeOutDuration = 1.5f;
+    public float defaultFadeOutDuration = 1.2f;
 
     [Header("PS1 Fade Style")]
     [Range(2, 32)]
-    public int alphaSteps = 8;     // Lower = chunkier
+    public int alphaSteps = 8;          // Chunkiness
     [Range(5f, 30f)]
-    public float fadeTickRate = 12f; // "FPS" of the fade
+    public float fadeTickRate = 12f;    // Low "FPS"
     public bool jitterTiming = true;
 
     [Header("Audio")]
@@ -26,10 +28,18 @@ public class MissionStateImage : MonoBehaviour
     public AudioClip startSound;
     public AudioClip finishedSound;
 
-    private Image image;
+    private TextMeshProUGUI tmp;
     private Coroutine stateRoutine;
-    private Material runtimeMaterial;
     private QuestState questState;
+
+    void Awake()
+    {
+        tmp = GetComponent<TextMeshProUGUI>();
+        audioSource = GetComponent<AudioSource>();
+
+        tmp.text = "";
+        SetAlpha(0f);
+    }
 
     private void OnEnable()
     {
@@ -38,12 +48,6 @@ public class MissionStateImage : MonoBehaviour
     private void OnDisable()
     {
         GameEventsManager.instance.questEvents.onQuestStateChange += HandleQuestStateChange;
-    }
-
-    private void Awake()
-    {
-        image = GetComponent<Image>();
-        gameObject.SetActive(false);
     }
 
     private void HandleQuestStateChange(Quest quest)
@@ -55,68 +59,53 @@ public class MissionStateImage : MonoBehaviour
                 ShowMissionStarted();
                 break;
             case QuestState.FINISHED:
-                ShowMissionComplete();
+                ShowMissionSuccess();
                 break;
         }
     }
 
-    public void ShowMissionStarted()
+    private void ShowMissionStarted()
     {
-        ShowState(
-            missionStartedMaterial,
+        ShowText(missionStartedText,
             defaultFadeInDuration,
             defaultHoldDuration,
-            defaultFadeOutDuration
-        );
+            defaultFadeOutDuration);
     }
 
-    public void ShowMissionComplete()
+    private void ShowMissionSuccess()
     {
-        ShowState(
-            missionCompleteMaterial,
+        ShowText(missionSuccessText,
             defaultFadeInDuration,
             defaultHoldDuration,
-            defaultFadeOutDuration
-        );
+            defaultFadeOutDuration);
     }
 
-    public void ShowMissionFailed()
+    private void ShowMissionFailed()
     {
-        ShowState(
-            missionFailedMaterial,
+        ShowText(missionFailedText,
             defaultFadeInDuration,
             defaultHoldDuration,
-            defaultFadeOutDuration
-        );
+            defaultFadeOutDuration);
     }
 
-
-    public void ShowState(
-        Material sourceMaterial,
+    private void ShowText(
+        string text,
         float fadeInDuration,
         float holdDuration,
         float fadeOutDuration
     )
     {
-        gameObject.SetActive(true);
         if (stateRoutine != null)
             StopCoroutine(stateRoutine);
 
-        // Destroy previous runtime material
-        if (runtimeMaterial != null)
-            Destroy(runtimeMaterial);
-
-        // Create instance
-        runtimeMaterial = new Material(sourceMaterial);
-        image.material = runtimeMaterial;
-
-        SetMaterialAlpha(0f);
+        tmp.text = text;
+        tmp.ForceMeshUpdate();
+        SetAlpha(0f);
 
         stateRoutine = StartCoroutine(StateSequence(
             fadeInDuration,
             holdDuration,
-            fadeOutDuration
-        ));
+            fadeOutDuration));
     }
 
     private IEnumerator StateSequence(
@@ -125,50 +114,9 @@ public class MissionStateImage : MonoBehaviour
         float fadeOutDuration
     )
     {
-        yield return FadeMaterial(0f, 1f, fadeInDuration, GetSoundToPlay());
+        yield return FadeText(0f, 1f, fadeInDuration, GetSoundToPlay());
         yield return new WaitForSeconds(holdDuration);
-        yield return FadeMaterial(1f, 0f, fadeOutDuration);
-        gameObject.SetActive(false);
-    }
-
-    private IEnumerator FadeMaterial(
-        float startAlpha,
-        float endAlpha,
-        float duration,
-        AudioClip sound = null
-    )
-    {
-        if (sound != null)
-            audioSource.PlayOneShot(sound);
-
-        float elapsed = 0f;
-        float tickInterval = 1f / fadeTickRate;
-
-        while (elapsed < duration)
-        {
-            elapsed += tickInterval;
-
-            float t = Mathf.Clamp01(elapsed / duration);
-
-            // Quantized alpha (PS1 step look)
-            float rawAlpha = Mathf.Lerp(startAlpha, endAlpha, t);
-            float steppedAlpha = Mathf.Round(rawAlpha * alphaSteps) / alphaSteps;
-
-            SetMaterialAlpha(steppedAlpha);
-
-            // Optional jitter for extra crunch
-            float jitter = jitterTiming ? Random.Range(-0.01f, 0.01f) : 0f;
-            yield return new WaitForSeconds(Mathf.Max(0f, tickInterval + jitter));
-        }
-
-        SetMaterialAlpha(endAlpha);
-    }
-
-    private void SetMaterialAlpha(float alpha)
-    {
-        Color c = runtimeMaterial.color;
-        c.a = alpha;
-        runtimeMaterial.color = c;
+        yield return FadeText(1f, 0f, fadeOutDuration, null);
     }
 
     private AudioClip GetSoundToPlay()
@@ -186,9 +134,68 @@ public class MissionStateImage : MonoBehaviour
         return soundToPlay;
     }
 
-    void OnDestroy()
+    // === PS1-STYLE FADE ===
+
+    private IEnumerator FadeText(
+        float startAlpha,
+        float endAlpha,
+        float duration,
+        AudioClip sound
+    )
     {
-        if (runtimeMaterial != null)
-            Destroy(runtimeMaterial);
+        if (sound != null)
+            audioSource.PlayOneShot(sound);
+
+        float elapsed = 0f;
+        float tickInterval = 1f / fadeTickRate;
+
+        while (elapsed < duration)
+        {
+            elapsed += tickInterval;
+            float t = Mathf.Clamp01(elapsed / duration);
+
+            float rawAlpha = Mathf.Lerp(startAlpha, endAlpha, t);
+            float steppedAlpha = Mathf.Round(rawAlpha * alphaSteps) / alphaSteps;
+
+            // Extra PS1 harsh cutoff
+            if (steppedAlpha < 0.05f)
+                steppedAlpha = 0f;
+
+            SetAlpha(steppedAlpha);
+
+            float jitter = jitterTiming ? Random.Range(-0.01f, 0.01f) : 0f;
+            yield return new WaitForSeconds(Mathf.Max(0f, tickInterval + jitter));
+        }
+
+        SetAlpha(endAlpha);
+    }
+
+    // === VERTEX COLOR ALPHA ===
+
+    private void SetAlpha(float alpha)
+    {
+        tmp.ForceMeshUpdate();
+        var textInfo = tmp.textInfo;
+
+        for (int i = 0; i < textInfo.characterCount; i++)
+        {
+            var charInfo = textInfo.characterInfo[i];
+            if (!charInfo.isVisible)
+                continue;
+
+            int vertexIndex = charInfo.vertexIndex;
+            int materialIndex = charInfo.materialReferenceIndex;
+
+            var colors = textInfo.meshInfo[materialIndex].colors32;
+
+            byte a = (byte)(alpha * 255);
+
+            colors[vertexIndex + 0].a = a;
+            colors[vertexIndex + 1].a = a;
+            colors[vertexIndex + 2].a = a;
+            colors[vertexIndex + 3].a = a;
+        }
+
+        tmp.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32);
     }
 }

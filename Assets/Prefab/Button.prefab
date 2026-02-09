@@ -189,8 +189,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Button
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9c7ca00461a94f548985cae7739ed8fb, type: 2}
-  m_sharedMaterial: {fileID: 2172394888864053159, guid: 9c7ca00461a94f548985cae7739ed8fb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e78a9c5555a1fcd4784b9d7072edb365, type: 2}
+  m_sharedMaterial: {fileID: 5068434389721174343, guid: e78a9c5555a1fcd4784b9d7072edb365, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -271,4 +271,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c685946c096419c4abc556dfd6d99fbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogButton
-  cursorTexture: {fileID: 2800000, guid: 8fe65ca7a83312a4d806978a9bd498f6, type: 3}
