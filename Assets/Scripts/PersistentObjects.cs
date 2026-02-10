@@ -12,7 +12,7 @@ public class PersistentObjects : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }

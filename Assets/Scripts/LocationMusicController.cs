@@ -3,8 +3,8 @@ using UnityEngine;
 public class LocationMusicController : MonoBehaviour
 {
 
-    public AudioSource audioSource;
-    public AudioClip clip;
+    public AudioClip musicClip;
+    public AudioClip ambientClip;
     private bool isOnTarget = false;
     private bool isPlaying = false;
 
@@ -28,28 +28,25 @@ public class LocationMusicController : MonoBehaviour
 
     void Update()
     {
-        if (isOnTarget && !isPlaying)
+        if (SoundController.instance)
         {
-            PlayMusic(clip);
-            isPlaying = true;
-            return;
+
+            if (isOnTarget && !isPlaying)
+            {
+                SoundController.instance.PlayMusicClip(musicClip);
+                SoundController.instance.PlayAmbientClip(ambientClip);
+                isPlaying = true;
+                return;
+            }
+
+            if (!isOnTarget && isPlaying)
+            {
+                SoundController.instance.PauseMusic();
+                SoundController.instance.PauseAmbient();
+                isPlaying = false;
+                return;
+            }
         }
 
-        if (!isOnTarget && isPlaying)
-        {
-            PauseMusic();
-            isPlaying = false;
-            return;
-        }
-
-    }
-    public void PlayMusic(AudioClip clip)
-    {
-        audioSource.clip = clip;
-        audioSource.Play();
-    }
-    public void PauseMusic()
-    {
-        audioSource.Pause();
     }
 }

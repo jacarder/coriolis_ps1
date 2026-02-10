@@ -1260,7 +1260,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39b3e66642154dd418553e1248bf88dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MusicPlayer
-  audioSource: {fileID: 1791400360}
 --- !u!82 &1791400360
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1461,7 +1460,6 @@ GameObject:
   - component: {fileID: 1920757590}
   - component: {fileID: 1920757593}
   - component: {fileID: 1920757592}
-  - component: {fileID: 1920757594}
   - component: {fileID: 1920757591}
   m_Layer: 5
   m_Name: PressStartText
@@ -1606,21 +1604,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1920757589}
   m_CullTransparentMesh: 1
---- !u!114 &1920757594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920757589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4713b59745288e541911c574ec906d64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SceneTransition
-  fadeImage: {fileID: 205966233}
-  fadeDuration: 1
-  sceneToLoad: Neoptra_Spaceport
 --- !u!1 &1937045460
 GameObject:
   m_ObjectHideFlags: 0

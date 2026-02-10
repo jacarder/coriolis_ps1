@@ -11,12 +11,12 @@ public class HUDController : MonoBehaviour
         DisableDice();
         DisableDialog();
     }
-    [SerializeField] TMP_Text interactionText;
-    [SerializeField] TMP_Text questText;
-    [SerializeField] GameObject dialoguePanel;
-    [SerializeField] GameObject dice;
-    [SerializeField] GameObject diceResultsContainer;
-    [SerializeField] Camera dicCamera;
+    public TMP_Text interactionText;
+    public TMP_Text questText;
+    public GameObject dialoguePanel;
+    public GameObject dice;
+    public GameObject diceResultsContainer;
+    public Camera dicCamera;
 
     public void EnableInteractionText(string text)
     {
@@ -25,7 +25,10 @@ public class HUDController : MonoBehaviour
     }
     public void DisableInteractionText()
     {
-        interactionText.gameObject.SetActive(false);
+        if (interactionText)
+        {
+            interactionText.gameObject.SetActive(false);
+        }
     }
 
     public void EnableDialog()

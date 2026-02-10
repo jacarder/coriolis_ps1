@@ -48,8 +48,9 @@ public class ScreenFadeController : MonoBehaviour
     {
         // Freeze game
         Time.timeScale = 0f;
-        MusicPlayer.instance.audioSource.Stop();
+        SoundController.instance?.StopAllSound();
         yield return StartCoroutine(Fade(0f, 1f));
+        HUDController.instance?.DisableInteractionText();
         SceneManager.LoadScene(sceneName);
     }
 

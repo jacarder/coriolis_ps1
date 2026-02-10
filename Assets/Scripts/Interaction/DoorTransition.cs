@@ -29,7 +29,7 @@ public class DoorTransition : MonoBehaviour
             doorRoot = transform;
 
         fadeImage = GameObject.Find("FadeImage")?.GetComponent<Image>();
-        startPos = doorRoot.position;
+        startPos = doorRoot.localPosition;
         endPos = startPos + slideOffset;
     }
 
@@ -48,11 +48,11 @@ public class DoorTransition : MonoBehaviour
         while (t < slideDuration)
         {
             t += Time.deltaTime;
-            doorRoot.position = Vector3.Lerp(startPos, endPos, t / slideDuration);
+            doorRoot.localPosition = Vector3.Lerp(startPos, endPos, t / slideDuration);
             yield return null;
         }
 
-        doorRoot.position = endPos;
+        doorRoot.localPosition = endPos;
         callback();
     }
 }
