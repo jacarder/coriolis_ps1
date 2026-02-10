@@ -24,7 +24,7 @@ public class ScreenFadeController : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        FirstPersonMovement.instance.UpdatePlayerPosition();
+        FirstPersonMovement.instance?.UpdatePlayerPosition();
         StartCoroutine(FadeIn());
     }
 
