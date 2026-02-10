@@ -380,7 +380,9 @@ MonoBehaviour:
   doorRoot: {fileID: 0}
   slideOffset: {x: 2, y: 0, z: 0}
   slideDuration: 0.6
-  freezeTime: 0.75
+  fadeImage: {fileID: 0}
+  nextScenePosition: {x: 0, y: 0, z: 0}
+  playerPosition: {fileID: 11400000, guid: 04b97807e8ae0da499c9dc692e18bbf8, type: 2}
 --- !u!4 &5280347371043420212 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b46af0c6525f10141af4b16b75c81635, type: 3}

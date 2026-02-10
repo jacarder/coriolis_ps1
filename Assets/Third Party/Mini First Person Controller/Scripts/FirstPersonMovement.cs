@@ -11,6 +11,7 @@ public class FirstPersonMovement : MonoBehaviour
     public bool IsRunning { get; private set; }
     public float runSpeed = 9;
     public KeyCode runningKey = KeyCode.LeftShift;
+    public VectorValueSO startingPosition;
     private bool allowMove = true;
 
     Rigidbody rigidbody;
@@ -24,6 +25,7 @@ public class FirstPersonMovement : MonoBehaviour
         instance = this;
         // Get the rigidbody on this.
         rigidbody = GetComponent<Rigidbody>();
+        rigidbody.transform.position = startingPosition.initialValue;
     }
 
     void FixedUpdate()
@@ -56,5 +58,10 @@ public class FirstPersonMovement : MonoBehaviour
     public void StartMovement()
     {
         allowMove = true;
+    }
+
+    public void UpdatePlayerPosition()
+    {
+        rigidbody.transform.position = startingPosition.initialValue;
     }
 }

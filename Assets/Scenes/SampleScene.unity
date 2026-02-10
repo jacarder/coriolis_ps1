@@ -133,15 +133,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 971045745657374334, guid: 4164fce59326b6c45987d31be7fb3881, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.69
+      value: -11
       objectReference: {fileID: 0}
     - target: {fileID: 971045745657374334, guid: 4164fce59326b6c45987d31be7fb3881, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.045000657
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 971045745657374334, guid: 4164fce59326b6c45987d31be7fb3881, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.8098984
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 971045745657374334, guid: 4164fce59326b6c45987d31be7fb3881, type: 3}
       propertyPath: m_LocalRotation.w
@@ -174,6 +174,18 @@ PrefabInstance:
     - target: {fileID: 3877279525701991910, guid: 4164fce59326b6c45987d31be7fb3881, type: 3}
       propertyPath: sceneToLoad
       value: Neoptra_Spaceport
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877279525701991910, guid: 4164fce59326b6c45987d31be7fb3881, type: 3}
+      propertyPath: nextScenePosition.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877279525701991910, guid: 4164fce59326b6c45987d31be7fb3881, type: 3}
+      propertyPath: nextScenePosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877279525701991910, guid: 4164fce59326b6c45987d31be7fb3881, type: 3}
+      propertyPath: nextScenePosition.z
+      value: -4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

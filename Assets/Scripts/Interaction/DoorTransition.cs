@@ -21,6 +21,8 @@ public class DoorTransition : MonoBehaviour
 
     Vector3 startPos;
     Vector3 endPos;
+    private Vector3 nextScenePosition;
+    public VectorValueSO playerPosition;
 
     void Awake()
     {
@@ -33,11 +35,13 @@ public class DoorTransition : MonoBehaviour
         endPos = startPos + slideOffset;
     }
 
-    public void ActivateDoor(string sceneToLoad)
+    public void ActivateDoor(string sceneToLoad, Vector3 nextScenePosition)
     {
+        this.nextScenePosition = nextScenePosition;
         this.sceneToLoad = sceneToLoad;
         StartCoroutine(DoorSequence(() =>
         {
+            playerPosition.initialValue = nextScenePosition;
             ScreenFadeController.Instance.FadeToScene(sceneToLoad);
         }));
     }
