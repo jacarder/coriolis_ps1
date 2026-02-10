@@ -2085,6 +2085,22 @@ PrefabInstance:
       propertyPath: nextScenePosition.z
       value: -4
       objectReference: {fileID: 0}
+    - target: {fileID: 3877279525701991910, guid: 4164fce59326b6c45987d31be7fb3881, type: 3}
+      propertyPath: nextSceneRotation.w
+      value: -0.00000004371139
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877279525701991910, guid: 4164fce59326b6c45987d31be7fb3881, type: 3}
+      propertyPath: nextSceneRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877279525701991910, guid: 4164fce59326b6c45987d31be7fb3881, type: 3}
+      propertyPath: nextSceneRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3877279525701991910, guid: 4164fce59326b6c45987d31be7fb3881, type: 3}
+      propertyPath: nextSceneRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

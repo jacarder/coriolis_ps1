@@ -5,6 +5,7 @@ public class Door : MonoBehaviour
     [Header("Scene")]
     public string sceneToLoad;
     public Vector3 nextScenePosition;
+    public Quaternion nextSceneRotation;
     private DoorTransition doorTransitionScript;
 
     void Awake()
@@ -13,6 +14,6 @@ public class Door : MonoBehaviour
     }
     public void SceneTransition()
     {
-        doorTransitionScript.ActivateDoor(sceneToLoad, nextScenePosition);
+        doorTransitionScript.ActivateDoor(sceneToLoad, nextScenePosition, nextSceneRotation);
     }
 }

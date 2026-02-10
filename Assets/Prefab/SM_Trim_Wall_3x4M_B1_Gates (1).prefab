@@ -242,6 +242,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Door
   sceneToLoad: 
+  nextScenePosition: {x: 0, y: 0, z: 0}
+  nextSceneRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &524043263136063927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,8 +383,8 @@ MonoBehaviour:
   slideOffset: {x: 2, y: 0, z: 0}
   slideDuration: 0.6
   fadeImage: {fileID: 0}
-  nextScenePosition: {x: 0, y: 0, z: 0}
   playerPosition: {fileID: 11400000, guid: 04b97807e8ae0da499c9dc692e18bbf8, type: 2}
+  playerRotation: {fileID: 11400000, guid: bda722e33736b094fa361cf38e6059dd, type: 2}
 --- !u!4 &5280347371043420212 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b46af0c6525f10141af4b16b75c81635, type: 3}

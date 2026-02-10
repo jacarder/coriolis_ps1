@@ -24,7 +24,9 @@ public class ScreenFadeController : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        FirstPersonMovement.instance?.UpdatePlayerPosition();
+        FirstPersonMovement.instance?.
+        UpdatePlayerPosition();
+        FirstPersonMovement.instance?.UpdatePlayerRotation();
         StartCoroutine(FadeIn());
     }
 
@@ -43,7 +45,6 @@ public class ScreenFadeController : MonoBehaviour
         // Freeze game
         Time.timeScale = 0f;
         SoundController.instance?.StopAllSound();
-        HUDController.instance?.DisableInteractionText();
         FirstPersonLook.instance?.StopMovement();
         FirstPersonMovement.instance?.StopMovement();
         yield return StartCoroutine(Fade(0f, 1f));

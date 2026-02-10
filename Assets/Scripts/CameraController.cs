@@ -51,8 +51,8 @@ public class CameraController : MonoBehaviour
         }
 
         // Start with main camera active
-        mainCamera.enabled = true;
-        firstPersonCamera.enabled = false;
+        mainCamera.enabled = false;
+        firstPersonCamera.enabled = true;
         orbitAngle = 0f;
 
         // Store default FOV
@@ -85,7 +85,7 @@ public class CameraController : MonoBehaviour
         }
         else if (isOrbiting)
         {
-            UpdateOrbitCamera();
+            //UpdateOrbitCamera();
         }
     }
 
@@ -104,7 +104,7 @@ public class CameraController : MonoBehaviour
         {
             if (isOrbiting && !isTransitioning)
             {
-                StartTransitionToFPV();
+                //StartTransitionToFPV();
             }
             inactivityTimer = 0f;
         }
@@ -119,7 +119,7 @@ public class CameraController : MonoBehaviour
 
             if (inactivityTimer >= inactivityTime)
             {
-                StartTransitionToOrbit();
+                //StartTransitionToOrbit();
             }
         }
         else if (isNPCInteraction)
@@ -131,41 +131,41 @@ public class CameraController : MonoBehaviour
 
     void UpdateCameraTransition()
     {
-        transitionTimer += Time.deltaTime;
-        float t = Mathf.Clamp01(transitionTimer / transitionDuration);
+        // transitionTimer += Time.deltaTime;
+        // float t = Mathf.Clamp01(transitionTimer / transitionDuration);
 
-        // Smooth easing
-        t = Mathf.SmoothStep(0f, 1f, t);
+        // // Smooth easing
+        // t = Mathf.SmoothStep(0f, 1f, t);
 
-        if (isOrbiting)
-        {
-            // Transitioning from FPV back to orbit
-            Vector3 targetPos = CalculateOrbitPosition();
-            Quaternion targetRot = Quaternion.LookRotation(player.position - targetPos);
+        // if (isOrbiting)
+        // {
+        //     // Transitioning from FPV back to orbit
+        //     Vector3 targetPos = CalculateOrbitPosition();
+        //     Quaternion targetRot = Quaternion.LookRotation(player.position - targetPos);
 
-            mainCamera.transform.position = Vector3.Lerp(transitionStartPos, targetPos, t);
-            mainCamera.transform.rotation = Quaternion.Slerp(transitionStartRot, targetRot, t);
+        //     mainCamera.transform.position = Vector3.Lerp(transitionStartPos, targetPos, t);
+        //     mainCamera.transform.rotation = Quaternion.Slerp(transitionStartRot, targetRot, t);
 
-            if (t >= 1f)
-            {
-                isTransitioning = false;
-                firstPersonCamera.enabled = false;
-                mainCamera.enabled = true;
-            }
-        }
-        else
-        {
-            // Transitioning from orbit to FPV
-            mainCamera.transform.position = Vector3.Lerp(transitionStartPos, firstPersonCamera.transform.position, t);
-            mainCamera.transform.rotation = Quaternion.Slerp(transitionStartRot, firstPersonCamera.transform.rotation, t);
+        //     if (t >= 1f)
+        //     {
+        //         isTransitioning = false;
+        //         firstPersonCamera.enabled = false;
+        //         mainCamera.enabled = true;
+        //     }
+        // }
+        // else
+        // {
+        //     // Transitioning from orbit to FPV
+        //     mainCamera.transform.position = Vector3.Lerp(transitionStartPos, firstPersonCamera.transform.position, t);
+        //     mainCamera.transform.rotation = Quaternion.Slerp(transitionStartRot, firstPersonCamera.transform.rotation, t);
 
-            if (t >= 1f)
-            {
-                isTransitioning = false;
-                mainCamera.enabled = false;
-                firstPersonCamera.enabled = true;
-            }
-        }
+        //     if (t >= 1f)
+        //     {
+        //         isTransitioning = false;
+        //         mainCamera.enabled = false;
+        //         firstPersonCamera.enabled = true;
+        //     }
+        // }
     }
 
     void UpdateNPCTracking()
@@ -191,62 +191,62 @@ public class CameraController : MonoBehaviour
         ) / 10f) * 10f; ;
     }
 
-    void StartTransitionToFPV()
-    {
-        isOrbiting = false;
-        isTransitioning = true;
-        transitionTimer = 0f;
-        inactivityTimer = 0f;
+    // void StartTransitionToFPV()
+    // {
+    //     isOrbiting = false;
+    //     isTransitioning = true;
+    //     transitionTimer = 0f;
+    //     inactivityTimer = 0f;
 
-        transitionStartPos = mainCamera.transform.position;
-        transitionStartRot = mainCamera.transform.rotation;
+    //     transitionStartPos = mainCamera.transform.position;
+    //     transitionStartRot = mainCamera.transform.rotation;
 
-        // Keep main camera active during transition
-        mainCamera.enabled = true;
-        firstPersonCamera.enabled = false;
-    }
+    //     // Keep main camera active during transition
+    //     mainCamera.enabled = true;
+    //     firstPersonCamera.enabled = false;
+    // }
 
-    void StartTransitionToOrbit()
-    {
-        isOrbiting = true;
-        isTransitioning = true;
-        transitionTimer = 0f;
-        inactivityTimer = 0f;
+    // void StartTransitionToOrbit()
+    // {
+    //     isOrbiting = true;
+    //     isTransitioning = true;
+    //     transitionTimer = 0f;
+    //     inactivityTimer = 0f;
 
-        transitionStartPos = firstPersonCamera.transform.position;
-        transitionStartRot = firstPersonCamera.transform.rotation;
+    //     transitionStartPos = firstPersonCamera.transform.position;
+    //     transitionStartRot = firstPersonCamera.transform.rotation;
 
-        // Set orbit angle to start from behind the player
-        Vector3 playerForward = player.forward;
-        orbitAngle = Mathf.Atan2(-playerForward.z, -playerForward.x) * Mathf.Rad2Deg;
+    //     // Set orbit angle to start from behind the player
+    //     Vector3 playerForward = player.forward;
+    //     orbitAngle = Mathf.Atan2(-playerForward.z, -playerForward.x) * Mathf.Rad2Deg;
 
-        // Switch to main camera for transition
-        mainCamera.enabled = true;
-        firstPersonCamera.enabled = false;
-        mainCamera.transform.position = transitionStartPos;
-        mainCamera.transform.rotation = transitionStartRot;
-    }
+    //     // Switch to main camera for transition
+    //     mainCamera.enabled = true;
+    //     firstPersonCamera.enabled = false;
+    //     mainCamera.transform.position = transitionStartPos;
+    //     mainCamera.transform.rotation = transitionStartRot;
+    // }
 
-    void UpdateOrbitCamera()
-    {
-        // Rotate around player
-        orbitAngle += orbitSpeed * Time.deltaTime;
-        if (orbitAngle >= 360f) orbitAngle -= 360f;
+    // void UpdateOrbitCamera()
+    // {
+    //     // Rotate around player
+    //     orbitAngle += orbitSpeed * Time.deltaTime;
+    //     if (orbitAngle >= 360f) orbitAngle -= 360f;
 
-        Vector3 targetPos = CalculateOrbitPosition();
-        mainCamera.transform.position = targetPos;
-        mainCamera.transform.LookAt(player.position);
-    }
+    //     Vector3 targetPos = CalculateOrbitPosition();
+    //     mainCamera.transform.position = targetPos;
+    //     mainCamera.transform.LookAt(player.position);
+    // }
 
-    Vector3 CalculateOrbitPosition()
-    {
-        float rad = orbitAngle * Mathf.Deg2Rad;
-        float x = player.position.x + Mathf.Cos(rad) * orbitDistance;
-        float z = player.position.z + Mathf.Sin(rad) * orbitDistance;
-        float y = player.position.y + orbitHeight;
+    // Vector3 CalculateOrbitPosition()
+    // {
+    //     float rad = orbitAngle * Mathf.Deg2Rad;
+    //     float x = player.position.x + Mathf.Cos(rad) * orbitDistance;
+    //     float z = player.position.z + Mathf.Sin(rad) * orbitDistance;
+    //     float y = player.position.y + orbitHeight;
 
-        return new Vector3(x, y, z);
-    }
+    //     return new Vector3(x, y, z);
+    // }
 
     // Public method for HUD Controller to call
     public void StartNPCInteraction(Transform npc)

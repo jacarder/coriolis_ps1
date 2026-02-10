@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbfdc41b748b6ae46b34ab76c5abcbed, type: 3}
-  m_Name: PlayerPosition
-  m_EditorClassIdentifier: Assembly-CSharp::VectorValueSO
-  initialValue: {x: -11, y: 1, z: -4}
+  m_Script: {fileID: 11500000, guid: 5759041e31ab3fd4489a8b2d82371e4d, type: 3}
+  m_Name: PlayerRotation
+  m_EditorClassIdentifier: Assembly-CSharp::QuaternionValueSO
+  initialValue: {x: 0.216184, y: 8.570358e-10, z: -0.000000003870638, w: 0.97635263}

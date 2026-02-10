@@ -3451,6 +3451,10 @@ PrefabInstance:
       propertyPath: startingPosition
       value: 
       objectReference: {fileID: 11400000, guid: 04b97807e8ae0da499c9dc692e18bbf8, type: 2}
+    - target: {fileID: 114963311885979670, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
+      propertyPath: startingRotation
+      value: 
+      objectReference: {fileID: 11400000, guid: bda722e33736b094fa361cf38e6059dd, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

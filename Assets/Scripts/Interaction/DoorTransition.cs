@@ -22,7 +22,9 @@ public class DoorTransition : MonoBehaviour
     Vector3 startPos;
     Vector3 endPos;
     private Vector3 nextScenePosition;
+    private Quaternion nextSceneRotation;
     public VectorValueSO playerPosition;
+    public QuaternionValueSO playerRotation;
 
     void Awake()
     {
@@ -35,13 +37,15 @@ public class DoorTransition : MonoBehaviour
         endPos = startPos + slideOffset;
     }
 
-    public void ActivateDoor(string sceneToLoad, Vector3 nextScenePosition)
+    public void ActivateDoor(string sceneToLoad, Vector3 nextScenePosition, Quaternion nextSceneRotation)
     {
         this.nextScenePosition = nextScenePosition;
+        this.nextSceneRotation = nextSceneRotation;
         this.sceneToLoad = sceneToLoad;
         StartCoroutine(DoorSequence(() =>
         {
             playerPosition.initialValue = nextScenePosition;
+            playerRotation.initialValue = nextSceneRotation;
             ScreenFadeController.Instance.FadeToScene(sceneToLoad);
         }));
     }
