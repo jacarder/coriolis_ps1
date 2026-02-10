@@ -18,6 +18,8 @@ public class SceneTransition : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         if (!isTransitioning)
+        {
             ScreenFadeController.Instance.FadeToScene(sceneToLoad);
+        }
     }
 }

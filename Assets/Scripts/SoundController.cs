@@ -11,8 +11,8 @@ public class SoundController : MonoBehaviour
     }
     public void StopAllSound()
     {
-        musicAudioSource.Stop();
-        ambientAudioSource.Stop();
+        if (ambientAudioSource) musicAudioSource.Stop();
+        if (ambientAudioSource) ambientAudioSource.Stop();
     }
     public void PlayMusicClip(AudioClip clip)
     {
@@ -33,11 +33,17 @@ public class SoundController : MonoBehaviour
 
     private void PlayAudioClip(AudioClip clip, AudioSource audioSource)
     {
-        audioSource.clip = clip;
-        audioSource.Play();
+        if (audioSource)
+        {
+            audioSource.clip = clip;
+            audioSource.Play();
+        }
     }
     private void PauseAudio(AudioSource audioSource)
     {
-        audioSource.Pause();
+        if (audioSource)
+        {
+            audioSource.Pause();
+        }
     }
 }
