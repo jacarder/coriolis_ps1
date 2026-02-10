@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject responseButtonPrefab; // Prefab for generating response buttons
     public Transform responseButtonContainer; // Container to hold response buttons
     private DialogueNode parentNode;
+    private NPC currentNPC;
 
     private List<Quest> quests = new List<Quest>();
 
@@ -49,21 +50,22 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(string title, DialogueNode node, GameObject npc)
     {
         // Turn to player
-        npc.GetComponent<NPC>().RotateTowards(GameObject.FindGameObjectWithTag("Player").transform.position);
+        currentNPC = npc.GetComponent<NPC>();
+        currentNPC.RotateTowards(GameObject.FindGameObjectWithTag("Player").transform.position);
         //  Set parent dialog node
         parentNode = node;
         //  Stop all audio
         //  TODO add tags for npcs to audio source to find
-        npc.GetComponent<NPC>().audioSource.Pause();
+        currentNPC.audioSource.Pause();
         //  Turn on dialog in hud
         HUDController.instance.EnableDialog();
-        ShowDialogue(npc);
+        ShowDialogue();
         // Display the dialogue UI
-        GetDialogue(title, node, npc);
+        GetDialogue(title, node);
     }
 
     // Handles response selection and triggers next dialogue node
-    public void HandleSelectResponse(DialogueResponse response, string title, GameObject npc)
+    public void HandleSelectResponse(DialogueResponse response, string title)
     {
         FirstPersonAudio.instance.StopDialogueAudio();
         if (response.isSkillCheck)
@@ -74,17 +76,17 @@ public class DialogueManager : MonoBehaviour
             {
                 Debug.Log("dice roll finished");
                 //  TODO show result of success fail or crit via new method from dice manager to determine. 1-2 success, 3 crit, all else if fail
-                SelectResponse(response, title, npc, diceResult);
+                SelectResponse(response, title, diceResult);
                 DiceManager.instance.ClearDice();
             });
         }
         else
         {
-            SelectResponse(response, title, npc);
+            SelectResponse(response, title);
         }
     }
 
-    private void SelectResponse(DialogueResponse response, string title, GameObject npc, DiceResult diceResult = null)
+    private void SelectResponse(DialogueResponse response, string title, DiceResult diceResult = null)
     {
         //  Response is accepting the quest
         if (response.startQuestId != "")
@@ -106,20 +108,18 @@ public class DialogueManager : MonoBehaviour
         // Check if there's a follow-up node
         if (!response.nextNode.IsLastNode())
         {
-            GetDialogue(title, response.nextNode, npc, diceResult); // Start next dialogue
+            GetDialogue(title, response.nextNode, diceResult); // Start next dialogue
         }
         else
         {
             if (response.returnToParent)
             {
-                GetDialogue(title, parentNode, npc, diceResult); // Start next dialogue
+                GetDialogue(title, parentNode, diceResult); // Start next dialogue
             }
             else
             {
                 // If no follow-up node, end the dialogue
                 HideDialogue();
-                npc.GetComponent<NPC>().ResetRotation();
-                npc.GetComponent<NPC>().audioSource.UnPause();
             }
         }
     }
@@ -148,7 +148,7 @@ public class DialogueManager : MonoBehaviour
             }
         }
     }
-    private void GetDialogue(string title, DialogueNode node, GameObject npc, DiceResult diceResult = null)
+    private void GetDialogue(string title, DialogueNode node, DiceResult diceResult = null)
     {
         // Set dialogue title and body text
         DialogTitleText.text = title;
@@ -182,7 +182,7 @@ public class DialogueManager : MonoBehaviour
                 buttonObj.GetComponentInChildren<TextMeshProUGUI>().text = "\u2022 " + response.responseText;
 
                 // Setup button to trigger SelectResponse when clicked
-                buttonObj.GetComponent<Button>().onClick.AddListener(() => HandleSelectResponse(response, title, npc));
+                buttonObj.GetComponent<Button>().onClick.AddListener(() => HandleSelectResponse(response, title));
             }
         }
     }
@@ -190,6 +190,12 @@ public class DialogueManager : MonoBehaviour
     // Hide the dialogue UI
     public void HideDialogue()
     {
+        if (currentNPC)
+        {
+            currentNPC.ResetRotation();
+            currentNPC.audioSource.UnPause();
+        }
+
         MouseController.instance?.HideMouse();
         CameraController.instance?.EndNPCInteraction();
         FirstPersonLook.instance.StartMovement();
@@ -199,10 +205,10 @@ public class DialogueManager : MonoBehaviour
     }
 
     // Show the dialogue UI
-    private void ShowDialogue(GameObject npc)
+    private void ShowDialogue()
     {
         MouseController.instance.ShowMouse();
-        CameraController.instance.StartNPCInteraction(npc.GetComponent<NPC>().npcFocusPoint.transform);
+        CameraController.instance.StartNPCInteraction(currentNPC.npcFocusPoint.transform);
         Cursor.lockState = CursorLockMode.None;
         FirstPersonLook.instance.StopMovement();
         FirstPersonMovement.instance.StopMovement();

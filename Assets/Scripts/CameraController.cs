@@ -33,6 +33,7 @@ public class CameraController : MonoBehaviour
     private Vector3 transitionStartPos;
     private Quaternion transitionStartRot;
     private Transform currentNPC;
+    private Quaternion currentNPCRotation;
     private float defaultFOV;
 
     void Start()
@@ -183,11 +184,11 @@ public class CameraController : MonoBehaviour
         );
 
         // Smoothly zoom FOV
-        // firstPersonCamera.fieldOfView = Mathf.Lerp(
-        //     firstPersonCamera.fieldOfView,
-        //     npcZoomFOV,
-        //     Time.deltaTime * npcTrackingSpeed
-        // );
+        firstPersonCamera.fieldOfView = Mathf.Ceil(Mathf.Lerp(
+            firstPersonCamera.fieldOfView,
+            npcZoomFOV,
+            Time.deltaTime * npcTrackingSpeed
+        ) / 10f) * 10f; ;
     }
 
     void StartTransitionToFPV()
@@ -253,6 +254,7 @@ public class CameraController : MonoBehaviour
         if (npc == null) return;
 
         currentNPC = npc;
+        currentNPCRotation = currentNPC.rotation;
         isNPCInteraction = true;
         inactivityTimer = 0f;
 
