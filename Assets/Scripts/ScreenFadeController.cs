@@ -43,8 +43,10 @@ public class ScreenFadeController : MonoBehaviour
         // Freeze game
         Time.timeScale = 0f;
         SoundController.instance?.StopAllSound();
-        yield return StartCoroutine(Fade(0f, 1f));
         HUDController.instance?.DisableInteractionText();
+        FirstPersonLook.instance?.StopMovement();
+        FirstPersonMovement.instance?.StopMovement();
+        yield return StartCoroutine(Fade(0f, 1f));
         SceneManager.LoadScene(sceneName);
     }
 
@@ -53,6 +55,8 @@ public class ScreenFadeController : MonoBehaviour
         yield return StartCoroutine(Fade(1f, 0f));
         //  Unfreeze
         Time.timeScale = 1f;
+        FirstPersonLook.instance?.StartMovement();
+        FirstPersonMovement.instance?.StartMovement();
     }
 
     IEnumerator Fade(float startAlpha, float endAlpha)
