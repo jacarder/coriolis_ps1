@@ -21,16 +21,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton pattern to ensure only one instance of DialogueManager
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
+        Instance = this;
         // Initially hide the dialogue UI
         HideDialogue();
     }
@@ -199,8 +190,8 @@ public class DialogueManager : MonoBehaviour
     // Hide the dialogue UI
     public void HideDialogue()
     {
-        MouseController.instance.HideMouse();
-        CameraController.instance.EndNPCInteraction();
+        MouseController.instance?.HideMouse();
+        CameraController.instance?.EndNPCInteraction();
         FirstPersonLook.instance.StartMovement();
         FirstPersonMovement.instance.StartMovement();
         FirstPersonAudio.instance.StopDialogueAudio();

@@ -1,18 +1,16 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PersistentObjects : MonoBehaviour
 {
-    public static PersistentObjects instance;
+    private static GameObject instance;
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            //Destroy(gameObject);
-        }
+        if (instance != null)
+            Destroy(instance);
+
+        instance = gameObject;
+        DontDestroyOnLoad(this);
+        SceneManager.LoadScene("Neoptra_Spaceport");
     }
 }
