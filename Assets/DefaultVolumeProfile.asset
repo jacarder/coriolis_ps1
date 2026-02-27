@@ -15,7 +15,7 @@ MonoBehaviour:
   active: 1
   type:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 8
   intensity:
     m_OverrideState: 1
     m_Value: 0
@@ -815,7 +815,7 @@ MonoBehaviour:
     m_Value: 1
   enabled:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   renderPassEvent:
     m_OverrideState: 1
     m_Value: 1
@@ -827,82 +827,82 @@ MonoBehaviour:
     m_Value: 0.01
   tintColor:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 0.6745283, g: 0.8590051, b: 1, a: 1}
   backgroundColor:
     m_OverrideState: 1
     m_Value: {r: 0, g: 0, b: 0, a: 1}
   scaleParameters:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   verticalReferenceResolution:
     m_OverrideState: 1
     m_Value: 1080
   forcePointFiltering:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   rgbTex:
     m_OverrideState: 1
-    m_Value: {fileID: 0}
+    m_Value: {fileID: 2800000, guid: 181d47e768319424291cbf45dfce2db1, type: 3}
     dimension: 1
   rgbStrength:
     m_OverrideState: 1
     m_Value: 0
   scanlineTex:
     m_OverrideState: 1
-    m_Value: {fileID: 0}
+    m_Value: {fileID: 2800000, guid: 7b5d79ca87223054fa2cb8ee041efb01, type: 3}
     dimension: 1
   scanlineStrength:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.849
   scanlineSize:
     m_OverrideState: 1
-    m_Value: 8
+    m_Value: 1
   scrollSpeed:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: -10
   pixelSize:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 4
   randomWear:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0
   aberrationStrength:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0
   useTracking:
     m_OverrideState: 1
     m_Value: 0
   trackingTexture:
     m_OverrideState: 1
-    m_Value: {fileID: 0}
+    m_Value: {fileID: 2800000, guid: 719d505767bc95942a4ff41e91d52eba, type: 3}
     dimension: 1
   trackingSize:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.251
   trackingStrength:
     m_OverrideState: 1
-    m_Value: 0.1
+    m_Value: 4.4
   trackingSpeed:
     m_OverrideState: 1
-    m_Value: 0.1
+    m_Value: -2.23
   trackingJitter:
     m_OverrideState: 1
-    m_Value: 0.01
+    m_Value: 0
   trackingColorDamage:
     m_OverrideState: 1
-    m_Value: 0.05
+    m_Value: 0.381
   trackingLinesThreshold:
     m_OverrideState: 1
-    m_Value: 0.9
+    m_Value: 1
   trackingLinesColor:
     m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 0.5}
   brightness:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 3
   contrast:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 1.7
   enableInterlacing:
     m_OverrideState: 1
     m_Value: 0
