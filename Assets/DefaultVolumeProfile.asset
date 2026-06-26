@@ -818,13 +818,13 @@ MonoBehaviour:
     m_Value: 1
   renderPassEvent:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   distortionStrength:
     m_OverrideState: 1
     m_Value: 0
   distortionSmoothing:
     m_OverrideState: 1
-    m_Value: 0.01
+    m_Value: 0
   tintColor:
     m_OverrideState: 1
     m_Value: {r: 0.6745283, g: 0.8590051, b: 1, a: 1}
@@ -853,7 +853,7 @@ MonoBehaviour:
     dimension: 1
   scanlineStrength:
     m_OverrideState: 1
-    m_Value: 0.849
+    m_Value: 0
   scanlineSize:
     m_OverrideState: 1
     m_Value: 1
