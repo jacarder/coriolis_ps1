@@ -28,13 +28,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RetroShadersPro.URP.CRTSettings
   active: 1
   showInSceneView:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   enabled:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   renderPassEvent:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   distortionStrength:
     m_OverrideState: 0

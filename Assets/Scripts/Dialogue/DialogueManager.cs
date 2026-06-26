@@ -24,7 +24,7 @@ public class DialogueManager : MonoBehaviour
     {
         Instance = this;
         // Initially hide the dialogue UI
-        HideDialogue();
+        //HideDialogue();
     }
 
     private void OnEnable()
