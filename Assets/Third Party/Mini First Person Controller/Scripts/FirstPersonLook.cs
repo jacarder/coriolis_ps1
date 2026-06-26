@@ -27,7 +27,7 @@ public class FirstPersonLook : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        MouseController.instance.HideMouse();
 
         // initialize look rotation from movement rotation
         Vector3 characterEuler = character.rotation.eulerAngles;

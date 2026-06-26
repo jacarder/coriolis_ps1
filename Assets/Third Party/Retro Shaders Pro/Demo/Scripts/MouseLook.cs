@@ -9,15 +9,15 @@ namespace PSXShadersPro.URP.Demo
         public Transform playerBody;
 
         private float xRotation = 0f;
-        
+
         private void Start()
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.lockState = CursorLockMode.Locked;
         }
-        
+
         private void Update()
         {
-            if(Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1"))
             {
                 Cursor.visible = false;
             }

@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using TMPro;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -209,7 +207,6 @@ public class DialogueManager : MonoBehaviour
     {
         MouseController.instance.ShowMouse();
         CameraController.instance.StartNPCInteraction(currentNPC.npcFocusPoint.transform);
-        Cursor.lockState = CursorLockMode.None;
         FirstPersonLook.instance.StopMovement();
         FirstPersonMovement.instance.StopMovement();
         DialogueParent.SetActive(true);

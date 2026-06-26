@@ -10,6 +10,7 @@ namespace RetroShadersPro.URP
         private void Start()
         {
             Application.targetFrameRate = targetFrameRate;
+            Debug.Log("FramerateLimiter is active");
         }
     }
 }

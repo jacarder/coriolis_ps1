@@ -1,5 +1,3 @@
-using UnityEngine.WSA;
-
 [System.Serializable]
 public class DialogueResponse
 {
